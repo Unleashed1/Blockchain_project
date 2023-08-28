@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luffy's Jumping Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="game-container">
+        <div id="game-insights">
+          <!-- <p>Username: <span id="name"></span></p> -->
+          <p><span id="score">Score: 0</span></p>
+        </div>
+        <div class="background" id="background"></div>
+        <img id="luffy" src="luffy_run_render.gif" alt="Luffy" />
+      </div>
+
+      <div class="start-game">
+        <form action="" id="game-form">
+          <div class="flex">
+            <label for="username">Username:</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter your username"
+              required
+            />
+          </div>
+          <div class="btns">
+            <button id="start">Start Game</button>
+            <!-- <button id="restart" type="button">Restart Game</button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
