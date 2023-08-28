@@ -116,7 +116,7 @@ function endGame() {
   // display restart btn
   restartBtn.style.display = 'block';
 
-  
+
 }
 
 function updateScore() {
@@ -141,7 +141,7 @@ function startGame(e) {
   e.preventDefault();
   moveBackground();
   createObstacle();
-  
+
   // hide background
   background.style.display = 'none';
 }
