@@ -17,7 +17,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -30,7 +31,8 @@
       "name": "makePayment",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"recipient\",\"type\":\"address\"}],\"name\":\"makePayment\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/payment.sol\":\"PaymentContract\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/payment.sol\":{\"keccak256\":\"0x47b6ecf816d7ad048bacaffa5cba03c048ae17d657cc1263c9ef15e8a7f6a226\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3459feb4fa152d5ed5ff6a93a29ab38ca636e523213990dc610ded0522e44bd7\",\"dweb:/ipfs/QmVnuvETg9tJPGmrzx4X2NPh2tHBnXg1BmQHNmnWgjrdTM\"]}},\"version\":1}",
@@ -3150,9 +3152,17 @@
     "name": "solc",
     "version": "0.8.21+commit.d9974bed.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0xB8a0CB4e75E64d251196a84a57d0DfdF3bEAd1D4",
+      "transactionHash": "0xb27d9df17d67c6cac03f94b6516f690b01d503da8b8978335262c6b0b29e36a1"
+    }
+  },
   "schemaVersion": "3.4.15",
-  "updatedAt": "2023-08-31T10:03:28.790Z",
+  "updatedAt": "2023-09-11T10:31:45.118Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},

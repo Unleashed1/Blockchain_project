@@ -6,7 +6,7 @@
                 return;
             }
 
-            const contractAddress = 'CONTRACT_ADDRESS'; // Replace with the actual contract address
+            const contractAddress = 'contract adddress';
             const contractABI = [/* Insert the contract ABI here */];
 
             const web3 = new Web3(window.ethereum);
