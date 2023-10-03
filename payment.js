@@ -1,4 +1,4 @@
-    async function makePayment() {
+    function makePayment() {
             const sourceAddress = document.getElementById("sourceAddress").value;
 
             if (!web3.utils.isAddress(sourceAddress)) {
@@ -14,7 +14,7 @@
 
             try {
                 const accounts = await ethereum.enable();
-                const recipientAddress = '0xdB1e52BD977916D2ad93E1e8Ab6601Ee940d787C'; // Destination address
+                const recipientAddress = '0x6A3A0eeDe87c645B693F7a4D4d560298f5d0508B'; // Destination address da cambiare se cambiamo block
                 const weiAmount = '50735670000000000'; // 50,735.67 wei
                 await contract.methods.makePayment(recipientAddress).send({
                     from: sourceAddress,

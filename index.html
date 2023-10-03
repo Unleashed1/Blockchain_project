@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,6 +37,33 @@
       </div>
     </div>
     <script src="app.js"></script>
-    <script src="payment.js"></script>
+           <script src="https://cdn.jsdelivr.net/npm/web3@1.2.2/dist/web3.min.js"></script>
+        <script>
+            window.addEventListener('load', function () {
+                if (window.ethereum) {
+                    window.web3 = new Web3(ethereum);
+                    ethereum.enable()
+                        .then(() => {
+                            console.log("Ethereum enabled");
+
+                            web3.eth.getAccounts(function (err, acc) {
+                                if (err != null) {
+                                    self.setStatus("There was an error fetching your accounts");
+                                    return;
+                                }
+                                if (acc.length > 0) {
+                                    console.log(acc);
+                                }
+                            });
+                        })
+                        .catch(() => {
+                            console.warn('User didn\'t allow access to accounts.');
+                            waitLogin();
+                        });
+                } else {
+                    console.log("Non-Ethereum browser detected. You should consider installing MetaMask.");
+                }
+            });
+        </script>
   </body>
 </html>

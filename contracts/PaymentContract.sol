@@ -10,6 +10,7 @@ contract PaymentContract {
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Only the owner can call this function");
+        _;
     }
 
     function makePayment(address payable recipient) external payable onlyOwner {
