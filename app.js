@@ -138,7 +138,6 @@ function moveBackground() {
 }
 
 function startGame(e) {
-  makePayment();
   e.preventDefault();
   moveBackground();
   createObstacle();
