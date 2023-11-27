@@ -1,7 +1,7 @@
-const PaymentContract = artifacts.require("PaymentContract");
-const StringManagement = artifacts.require("StringManagement");
+const Payment = artifacts.require("Payment");
+//const StringManagement = artifacts.require("StringManagement");
 
 module.exports = function (deployer) {
-  deployer.deploy(PaymentContract);
-  deployer.deploy(StringManagement);
+  deployer.deploy(Payment);
+  //deployer.deploy(StringManagement);
 };
