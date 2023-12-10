@@ -13,7 +13,6 @@ let isJumping = false;
 let score = 0;
 let obstacles = [];
 let bgPosition = 0;
-
 //funzione pagamento
 
 async function makePayment() {
@@ -1646,12 +1645,12 @@ async function makePayment() {
 function jump() {
   if (!isJumping) {
     isJumping = true;
-    let position = 0;
+    let position = 15;
     const jumpInterval = setInterval(() => {
-      if (position >= 170) {
+      if (position >= 270) {
         clearInterval(jumpInterval);
         let downInterval = setInterval(() => {
-          if (position === 0) {
+          if (position === 15) {
             clearInterval(downInterval);
             isJumping = false;
           }
@@ -1684,7 +1683,17 @@ function pickRandomImage(images) {
   return images[randomIndex];
 }
 
+let s = 0;
+let counter = 0;
 async function createObstacle() {
+  counter +=1;
+  s = s+1+Math.random(0,0.2);
+  if(counter > 1){
+    counter = 0;
+  }
+  if(s>=5){
+    s=0;
+  }
   const images = obstacleImages.map((imageName) => 'png/' + imageName);
 
   const obstacle = document.createElement('img');
@@ -1698,14 +1707,15 @@ async function createObstacle() {
   obstacle.style.bottom = '0px';
 
   moveObstacle(obstacle);
+
 }
 
 function moveObstacle(obstacle) {
-  let obstaclePosition = 800;
-  const speed = 5 + Math.random() * 5;
+  let obstaclePosition = 1800;
+  const speed = s;
 
   const moveInterval = setInterval(() => {
-    if (obstaclePosition < -148) {
+    if (obstaclePosition < -150) {
       clearInterval(moveInterval);
       obstacle.remove();
       obstacles = obstacles.filter((ob) => ob !== obstacle);
@@ -1720,7 +1730,7 @@ function moveObstacle(obstacle) {
     }
   }, 20);
 
-  setTimeout(createObstacle, Math.random() * 3000 + 1000);
+  setTimeout(createObstacle, 800*1000/s);
 }
 
 function checkCollision(obstacle) {
@@ -1768,12 +1778,12 @@ function moveBackground() {
 
 function startGame(e) {
   //add the payment function
-  makePayment()
+  //makePayment()
   e.preventDefault();
   moveBackground();
   createObstacle();
 
-  // hide background
+    // hide background
   background.style.display = 'none';
 }
 
