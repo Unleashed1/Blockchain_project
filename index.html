@@ -13,6 +13,8 @@
         <div id="game-insights">
           <!-- <p>Username: <span id="name"></span></p> -->
           <p><span id="score">Score: 0</span></p>
+<p style="font-size: 45px; color: red;">&#10084;&#10084;&#10084;</p>
+<!-- implementare funzione che li printa e fa il get con async con diminuzione ed incremento in caso di pagamento -->
         </div>
         <div class="background" id="background"></div>
         <img id="luffy" src="luffy_run_render.gif" alt="Luffy" />
@@ -37,27 +39,43 @@
           </div>
           <!-- da sismtemare tabella con css corretti-->
           <div>
-
-<table>
+<table id="rankTable">
   <thead>
     <tr>
-      <th>Column 1</th>
-      <th>Column 2</th>
-      <th>Column 3</th>
-      <th>Column 4</th>
-      <th>Column 5</th>
+      <th>Rank</th>
+      <th>Name</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <td>Row 1, Col 1</td>
-      <td>Row 1, Col 2</td>
-      <td>Row 1, Col 3</td>
-      <td>Row 1, Col 4</td>
-      <td>Row 1, Col 5</td>
-    </tr>
-      </tbody>
+  <tbody id="tableBody">
+  </tbody>
 </table>
+<script>
+
+  const data = [
+    '1.Name1', '2.Name2', '3.Name3', '4.Name4', '5.Name5',
+    '6.Name6', '7.Name7', '8.Name8', '9.Name9', '10.Name10',
+    '11.Name11', '12.Name12', '13.Name13', '14.Name14', '15.Name15'
+  ];
+
+     const table = document.getElementById('rankTable');
+    let row, cell, colCounter = 0;
+
+    for (let i = 0; i < data.length; i++) {
+      if (colCounter === 0) {
+        row = table.insertRow();
+      }
+
+      cell = row.insertCell();
+      const entryParts = data[i].split('.');
+      cell.textContent = entryParts[0]; // Display the number as the rank
+
+      colCounter++;
+      if (colCounter === 5) {
+        colCounter = 0;
+      }
+    }
+
+</script>
           </div>
         </form>
       </div>

@@ -1687,12 +1687,9 @@ let s = 0;
 let counter = 0;
 async function createObstacle() {
   counter +=1;
-  s = s+1+Math.random(0,0.2);
-  if(counter > 1){
-    counter = 0;
-  }
+  s = s+1+Math.random(0.5,0.8);
   if(s>=5){
-    s=0;
+    s=1;
   }
   const images = obstacleImages.map((imageName) => 'png/' + imageName);
 
