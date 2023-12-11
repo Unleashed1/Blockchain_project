@@ -30,7 +30,7 @@ body {
     bottom: 20px;
     width: 160px;
     height: 160px;
-    border: 2px solid #ccc;
+   // border: 2px solid #ccc;
 
   }
   
@@ -40,7 +40,7 @@ body {
     left: 800px;
     width: 148px;
     height: 125px;
-    border: 2px solid #ccc;
+    //border: 2px solid #ccc;
 
   }
 
@@ -85,7 +85,12 @@ body {
     color: black;
     font-size: 18px;
   }
+.mainTable{
+  border-style: dashed solid;
+  align-items: center;
+  width: 100%;
 
+}
   .background {
     position: absolute;
     top: 0;
@@ -112,6 +117,10 @@ body {
   align-items: center;
   gap: 20px;
 
+}
+.rankTable{
+  font-size: 20px;
+  position: relative;
 }
 #game-insights {
   width: 100%;

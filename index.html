@@ -39,22 +39,40 @@
           </div>
           <!-- da sismtemare tabella con css corretti-->
           <div>
-<table id="rankTable">
+          <p></p>
+          <table class="mainTable">
+          <tr>
+          <th>
+<table id="rankTable" class="rankTable">
   <thead>
     <tr>
-      <th>Rank</th>
-      <th>Name</th>
+      <th>Highest</th>
+      <th>Score!</th>
     </tr>
   </thead>
   <tbody id="tableBody">
   </tbody>
 </table>
+</th>
+
+<th>
+
+<h1>How to play?
+</h1>
+<p>
+Playing this game is simple, just use the space bar!
+By clicking on Start game a payment will be made using metamask <br> which will allow you to receive 3 lives which you can use to get the highest score! <br>If you get tired you can also pause and resume whenever you want!</p>
+</th>
+<th>
+
+
+<tr>
 <script>
 
   const data = [
-    '1.Name1', '2.Name2', '3.Name3', '4.Name4', '5.Name5',
-    '6.Name6', '7.Name7', '8.Name8', '9.Name9', '10.Name10',
-    '11.Name11', '12.Name12', '13.Name13', '14.Name14', '15.Name15'
+    '1.Name', '2.Name', '3.Name', '4.Name', '5.Name',
+    '6.Name', '7.Name', '8.Name', '9.Name', '10.Name',
+    '11.Name', '12.Name', '13.Name', '14.Name', '15.Name'
   ];
 
      const table = document.getElementById('rankTable');
@@ -66,8 +84,9 @@
       }
 
       cell = row.insertCell();
-      const entryParts = data[i].split('.');
-      cell.textContent = entryParts[0]; // Display the number as the rank
+      const entryParts = data[i]
+      //aggiungere check sulk'input dell'username e mettere al massimo 8 caratteri o 10
+      cell.textContent = entryParts // Display the number as the rank
 
       colCounter++;
       if (colCounter === 5) {
