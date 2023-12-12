@@ -13,6 +13,7 @@ let isJumping = false;
 let score = 0;
 let obstacles = [];
 let bgPosition = 0;
+let s=0;
 //funzione pagamento
 
 async function makePayment() {
@@ -1647,18 +1648,18 @@ function jump() {
     isJumping = true;
     let position = 15;
     const jumpInterval = setInterval(() => {
-      if (position >= 270) {
+      if (position >= 200) {
         clearInterval(jumpInterval);
         let downInterval = setInterval(() => {
           if (position === 15) {
             clearInterval(downInterval);
             isJumping = false;
           }
-          position -= 10;
+          position -= 2.5;
           luffy.style.bottom = position + 'px';
         }, 20);
       }
-      position += 10;
+      position += 2.5;
       luffy.style.bottom = position + 'px';
     }, 20);
   }
@@ -1667,6 +1668,7 @@ function jump() {
 document.addEventListener('keydown', (event) => {
   if (event.code === 'Space') {
     jump();
+    scoreBoard.innerHTML = 'Score: ' + score;
   }
 });
 
@@ -1683,13 +1685,12 @@ function pickRandomImage(images) {
   return images[randomIndex];
 }
 
-let s = 0;
 let counter = 0;
 async function createObstacle() {
   counter +=1;
-  s = s+1+Math.random(0.5,0.8);
-  if(s>=5){
-    s=1;
+  s = s+1.5+Math.random(0.5,0.8);
+  if(s>=10){
+    s=2.5;
   }
   const images = obstacleImages.map((imageName) => 'png/' + imageName);
 
@@ -1743,6 +1744,7 @@ function checkCollision(obstacle) {
 }
 
 function endGame() {
+  s=0;
   alert('Game Over!');
   scoreBoard.innerHTML = 'Score: ' + score;
   obstacles.forEach((obstacle) => obstacle.remove());
