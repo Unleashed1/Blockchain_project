@@ -1725,6 +1725,9 @@ function moveObstacle(obstacle) {
         endGame();
         clearInterval(moveInterval);
       }
+      else{
+        updateScore()
+      }
     }
   }, 20);
 
