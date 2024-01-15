@@ -1668,7 +1668,6 @@ function jump() {
 document.addEventListener('keydown', (event) => {
   if (event.code === 'Space') {
     jump();
-    scoreBoard.innerHTML = 'Score: ' + score;
   }
 });
 
@@ -1727,6 +1726,7 @@ function moveObstacle(obstacle) {
       }
       else{
         updateScore()
+        scoreBoard.innerHTML = 'Score: ' + score;
       }
     }
   }, 20);
