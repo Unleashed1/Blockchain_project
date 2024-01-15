@@ -1651,15 +1651,15 @@ function jump() {
       if (position >= 200) {
         clearInterval(jumpInterval);
         let downInterval = setInterval(() => {
-          if (position === 15) {
+          if (position <= 15) {
             clearInterval(downInterval);
             isJumping = false;
           }
-          position -= 2.5;
+          position -= s/2;
           luffy.style.bottom = position + 'px';
         }, 20);
       }
-      position += 2.5;
+      position += s/2;
       luffy.style.bottom = position + 'px';
     }, 20);
   }
@@ -1685,13 +1685,9 @@ function pickRandomImage(images) {
   return images[randomIndex];
 }
 
-let counter = 0;
 async function createObstacle() {
-  counter +=1;
   s = s+1.5+Math.random(0.5,0.8);
-  if(s>=10){
-    s=2.5;
-  }
+
   const images = obstacleImages.map((imageName) => 'png/' + imageName);
 
   const obstacle = document.createElement('img');
@@ -1705,6 +1701,10 @@ async function createObstacle() {
   obstacle.style.bottom = '0px';
 
   moveObstacle(obstacle);
+
+  if(s >= 20){
+     s=2.5;
+   }
 
 }
 

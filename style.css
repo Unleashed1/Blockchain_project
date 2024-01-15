@@ -30,7 +30,7 @@ body {
     bottom: 20px;
     width: 160px;
     height: 160px;
-   // border: 2px solid #ccc;
+    border: 2px solid #ccc;
 
   }
   
@@ -38,9 +38,9 @@ body {
     position: absolute;
     bottom: 2px;
     left: 800px;
-    width: 148px;
+    width: 145px;
     height: 125px;
-    //border: 2px solid #ccc;
+    border: 2px solid #ccc;
 
   }
 
