@@ -14,6 +14,7 @@ let score = 0;
 let obstacles = [];
 let bgPosition = 0;
 let s=0;
+let gameStart = false;
 //funzione pagamento
 
 async function makePayment() {
@@ -1665,11 +1666,11 @@ function jump() {
   }
 }
 
-document.addEventListener('keydown', (event) => {
+/*document.addEventListener('keydown', (event) => {
   if (event.code === 'Space') {
     jump();
   }
-});
+});*/
 
 const obstacleImages = [
   '15766.png',
@@ -1685,31 +1686,32 @@ function pickRandomImage(images) {
 }
 
 async function createObstacle() {
-  s = s+1.5+Math.random(0.5,0.8);
+  if (gameStart){
+    s = s+0.8;//+Math.random(0.5,0.8);
 
-  const images = obstacleImages.map((imageName) => 'png/' + imageName);
+    const images = obstacleImages.map((imageName) => 'png/' + imageName);
 
-  const obstacle = document.createElement('img');
-  obstacle.classList.add('obstacle');
-  obstacle.src = pickRandomImage(images);
+    const obstacle = document.createElement('img');
+    obstacle.classList.add('obstacle');
+    obstacle.src = pickRandomImage(images);
 
-  gameContainer.appendChild(obstacle);
-  obstacles.push(obstacle);
+    gameContainer.appendChild(obstacle);
+    obstacles.push(obstacle);
 
-  obstacle.style.left = '800px';
-  obstacle.style.bottom = '0px';
+    obstacle.style.left = '800px';
+    obstacle.style.bottom = '0px';
 
-  moveObstacle(obstacle);
+    moveObstacle(obstacle);
 
-  if(s >= 20){
-     s=2.5;
-   }
-
+    //if(s >= 20){
+    //   s=2.5;
+    // }
+  }
 }
 
 function moveObstacle(obstacle) {
   let obstaclePosition = 1800;
-  const speed = s;
+  //const speed = s;
 
   const moveInterval = setInterval(() => {
     if (obstaclePosition < -150) {
@@ -1717,7 +1719,7 @@ function moveObstacle(obstacle) {
       obstacle.remove();
       obstacles = obstacles.filter((ob) => ob !== obstacle);
     } else {
-      obstaclePosition -= speed;
+      obstaclePosition -= s;
       obstacle.style.left = obstaclePosition + 'px';
 
       if (!isJumping && checkCollision(obstacle)) {
@@ -1733,6 +1735,7 @@ function moveObstacle(obstacle) {
 
   setTimeout(createObstacle, 800*1000/s);
 }
+setTimeout(createObstacle, 1000*1000/s);
 
 function checkCollision(obstacle) {
   const luffyRect = luffy.getBoundingClientRect();
@@ -1753,6 +1756,7 @@ function endGame() {
   obstacles.forEach((obstacle) => obstacle.remove());
   obstacles = [];
   score = 0;
+  gameStart=false;
 
   // display restart btn
   restartBtn.style.display = 'block';
@@ -1781,6 +1785,7 @@ function moveBackground() {
 function startGame(e) {
   //add the payment function
   //makePayment()
+  gameStart = true;
   e.preventDefault();
   moveBackground();
   createObstacle();
