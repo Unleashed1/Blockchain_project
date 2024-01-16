@@ -6,6 +6,10 @@ const startBtn = document.getElementById('start');
 const restartBtn = document.getElementById('restart');
 const gameInsights = document.getElementById('game-insights');
 const username = document.getElementById('username');
+//Variabili delle vite
+const L1 = document.getElementById("L1");
+const L2 = document.getElementById("L2");
+const L3 = document.getElementById("L3");
 
 const scoreBoard = document.getElementById('score');
 
@@ -15,6 +19,11 @@ let obstacles = [];
 let bgPosition = 0;
 let s=0;
 let gameStart = false;
+startBtn.disabled = false;
+//Vite visualizzate tutte e 3 almeno finchè non sarà implementato il pagamento
+L1.hidden=false;
+L2.hidden=false;
+L3.hidden=false;
 //funzione pagamento
 
 async function makePayment() {
@@ -1666,11 +1675,11 @@ function jump() {
   }
 }
 
-/*document.addEventListener('keydown', (event) => {
+document.addEventListener('keydown', (event) => {
   if (event.code === 'Space') {
     jump();
   }
-});*/
+});
 
 const obstacleImages = [
   '15766.png',
@@ -1750,22 +1759,42 @@ function checkCollision(obstacle) {
 }
 
 function endGame() {
-  s=0;
+  s=1;
   alert('Game Over!');
   scoreBoard.innerHTML = 'Score: ' + score;
   obstacles.forEach((obstacle) => obstacle.remove());
   obstacles = [];
-  score = 0;
+  //score = 0;
   gameStart=false;
-
+  if (L1.hidden == false){
+    if(L2.hidden == false){
+      if(L3.hidden == false){
+        L3.hidden=true;
+      }
+      else{
+        L2.hidden = true;
+      }
+    } 
+    else{
+      L2.hidden = true;
+    } 
+  }
+  else{
+    L1.hidden=true;
+  }
   // display restart btn
-  restartBtn.style.display = 'block';
-
-
+  restartBtn.disabled = false;
 }
 
 function updateScore() {
   score++;
+}
+
+function restartGame(e){
+  gameStart = true;
+  e.preventDefault();
+  moveBackground();
+  createObstacle();
 }
 
 setInterval(updateScore, 100);
@@ -1789,13 +1818,16 @@ function startGame(e) {
   e.preventDefault();
   moveBackground();
   createObstacle();
-
+  startBtn.disabled = true;
     // hide background
   background.style.display = 'none';
 }
 
 gameForm.addEventListener('submit', startGame);
+gameForm.addEventListener('submit', restartGame);
 
+
+document.getElementById
 // jump luffy on click space
 document.addEventListener('keydown', (event) => {
   if (event.code === 'Space') {

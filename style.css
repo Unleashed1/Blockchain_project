@@ -118,6 +118,11 @@ body {
   gap: 20px;
 
 }
+
+button[disabled]{
+  cursor: none;
+  opacity: 0.5;
+}
 .rankTable{
   font-size: 20px;
   position: relative;

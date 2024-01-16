@@ -13,7 +13,12 @@
         <div id="game-insights">
           <!-- <p>Username: <span id="name"></span></p> -->
           <p><span id="score">Score: 0</span></p>
-<p style="font-size: 45px; color: red;">&#10084;&#10084;&#10084;</p>
+          <span class="lives">
+            <img id = "L1" src="heart.png" alt="heart" width="40" height="40" hidden>
+            <img id = "L2" src="heart.png" alt="heart" width="40" height="40" hidden>
+            <img id = "L3" src="heart.png" alt="heart" width="40" height="40" hidden>
+          </span>
+<!--p style="font-size: 45px; color: red;">&#10084;&#10084;&#10084;</p-->
 <!-- implementare funzione che li printa e fa il get con async con diminuzione ed incremento in caso di pagamento -->
         </div>
         <div class="background" id="background"></div>
@@ -32,8 +37,8 @@
             />
           </div>
           <div class="btns">
-            <button id="start">Start Game</button>
-            <button id="restart" type="button">Restart Game</button>
+            <button id="start" disabled cursor>Start Game</button>
+            <button id="restart" type="button" disabled cursor>Restart Game</button>
             <!--button id="start">Pause Game </button-->
             <!--button id="start">Resume Game </button-->
           </div>
