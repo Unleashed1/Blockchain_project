@@ -1656,22 +1656,22 @@ async function makePayment() {
 function jump() {
   if (!isJumping) {
     isJumping = true;
-    let position = 15;
+    let position = 2;
     const jumpInterval = setInterval(() => {
-      if (position >= 200) {
+      if (position >= 250) {
         clearInterval(jumpInterval);
         let downInterval = setInterval(() => {
-          if (position <= 15) {
+          if (position <= 2) {
             clearInterval(downInterval);
             isJumping = false;
           }
           position -= s/2;
           luffy.style.bottom = position + 'px';
-        }, 20);
+        }, 15);
       }
       position += s/2;
       luffy.style.bottom = position + 'px';
-    }, 20);
+    }, 15);
   }
 }
 
@@ -1696,19 +1696,21 @@ function pickRandomImage(images) {
 
 async function createObstacle() {
   if (gameStart){
+    console.log('create obstacle');
     s = s+0.8;//+Math.random(0.5,0.8);
 
     const images = obstacleImages.map((imageName) => 'png/' + imageName);
 
     const obstacle = document.createElement('img');
+
+    //obstacle.style.left = '800px';
+    //obstacle.style.bottom = '0px';
+
     obstacle.classList.add('obstacle');
     obstacle.src = pickRandomImage(images);
 
     gameContainer.appendChild(obstacle);
     obstacles.push(obstacle);
-
-    obstacle.style.left = '800px';
-    obstacle.style.bottom = '0px';
 
     moveObstacle(obstacle);
 
@@ -1731,7 +1733,7 @@ function moveObstacle(obstacle) {
       obstaclePosition -= s;
       obstacle.style.left = obstaclePosition + 'px';
 
-      if (!isJumping && checkCollision(obstacle)) {
+      if (checkCollision(obstacle)) {
         endGame();
         clearInterval(moveInterval);
       }
@@ -1742,18 +1744,26 @@ function moveObstacle(obstacle) {
     }
   }, 20);
 
-  setTimeout(createObstacle, 800*1000/s);
 }
-setTimeout(createObstacle, 1000*1000/s);
+
+setInterval(createObstacle,5000);
 
 function checkCollision(obstacle) {
   const luffyRect = luffy.getBoundingClientRect();
   const obstacleRect = obstacle.getBoundingClientRect();
 
+  /*console.log('obstacle')
+  console.log(obstacleRect.left)
+  console.log(obstacleRect.right)
+  
+  console.log('luffy')
+  console.log(luffyRect.left)
+  console.log(luffyRect.right)*/
+
   return (
     luffyRect.bottom >= obstacleRect.top &&
     luffyRect.top <= obstacleRect.bottom &&
-    luffyRect.right >= obstacleRect.left &&
+    luffyRect.right >= obstacleRect.left + 30 &&
     luffyRect.left <= obstacleRect.right
   );
 }
@@ -1765,6 +1775,7 @@ function endGame() {
   obstacles.forEach((obstacle) => obstacle.remove());
   obstacles = [];
   //score = 0;
+  luffy.bottom=2;
   gameStart=false;
   if (L1.hidden == false){
     if(L2.hidden == false){
@@ -1790,11 +1801,10 @@ function updateScore() {
   score++;
 }
 
-function restartGame(e){
+function restartGame(){
+  luffy.bottom=2;
   gameStart = true;
-  e.preventDefault();
   moveBackground();
-  createObstacle();
 }
 
 setInterval(updateScore, 100);
@@ -1811,20 +1821,24 @@ function moveBackground() {
   requestAnimationFrame(moveBackground);
 }
 
-function startGame(e) {
+function startGame() {
   //add the payment function
   //makePayment()
+  s=5;
   gameStart = true;
-  e.preventDefault();
+  //e.preventDefault();
   moveBackground();
-  createObstacle();
+  //createObstacle();
   startBtn.disabled = true;
     // hide background
   background.style.display = 'none';
 }
+//gameForm.addEventListener('submit', startGame);
 
-gameForm.addEventListener('submit', startGame);
-gameForm.addEventListener('submit', restartGame);
+startBtn.addEventListener('click',startGame)
+restartBtn.addEventListener('click',restartGame)
+
+//gameForm.addEventListener('restart', restartGame); 
 
 
 document.getElementById

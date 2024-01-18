@@ -27,20 +27,20 @@ body {
   
   #luffy {
     position: absolute;
-    bottom: 20px;
+    bottom: 2px;
     width: 160px;
     height: 160px;
-    /*border: 2px solid #ccc;*/
+    border: 2px solid #ccc;
 
   }
   
   .obstacle {
     position: absolute;
     bottom: 2px;
-    left: 800px;
-    width: 145px;
-    height: 125px;
-    /*border: 2px solid #ccc;*/
+    /*left: 800px;*/
+    /*width: 125px;*/
+    height: 140px;
+    border: 2px solid #ccc;
 
   }
 
