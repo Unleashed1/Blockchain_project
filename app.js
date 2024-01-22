@@ -6,6 +6,11 @@ const startBtn = document.getElementById('start');
 const restartBtn = document.getElementById('restart');
 const gameInsights = document.getElementById('game-insights');
 const username = document.getElementById('username');
+
+let jumpInterval;
+let downInterval;
+
+let up = false;
 //Variabili delle vite
 const L1 = document.getElementById("L1");
 const L2 = document.getElementById("L2");
@@ -1657,21 +1662,23 @@ function jump() {
   if (!isJumping) {
     isJumping = true;
     let position = 2;
-    const jumpInterval = setInterval(() => {
-      if (position >= 250) {
-        clearInterval(jumpInterval);
-        let downInterval = setInterval(() => {
-          if (position <= 2) {
-            clearInterval(downInterval);
-            isJumping = false;
-          }
-          position -= s/2;
-          luffy.style.bottom = position + 'px';
-        }, 15);
-      }
-      position += s/2;
-      luffy.style.bottom = position + 'px';
-    }, 15);
+    jumpInterval = setInterval(() => {
+        up=true;
+        if (position >= 250 ) {
+          clearInterval(jumpInterval);
+          up = false;
+          downInterval = setInterval(() => {
+            if (position <= 2 ) {
+              clearInterval(downInterval);
+              isJumping = false;
+            }
+            position -= s/2;
+            luffy.style.bottom = position + 'px';
+          }, 15);
+        }
+        position += s/2;
+        luffy.style.bottom = position + 'px';
+      }, 15);
   }
 }
 
@@ -1714,9 +1721,6 @@ async function createObstacle() {
 
     moveObstacle(obstacle);
 
-    //if(s >= 20){
-    //   s=2.5;
-    // }
   }
 }
 
@@ -1769,14 +1773,31 @@ function checkCollision(obstacle) {
 }
 
 function endGame() {
-  s=1;
+  s=5;
   alert('Game Over!');
   scoreBoard.innerHTML = 'Score: ' + score;
   obstacles.forEach((obstacle) => obstacle.remove());
   obstacles = [];
+  if (up){
+    clearInterval(jumpInterval);
+    let position = parseInt(luffy.style.bottom);
+    downInterval = setInterval(() => {
+      if (position <= 2 ) {
+        clearInterval(downInterval);
+        isJumping = false;
+        down=false;
+      }
+      position -= s/2;
+      luffy.style.bottom = position + 'px';
+    }, 15);
+  }
+
+  //luffy.style.bottom = 2 + 'px';
   //score = 0;
-  luffy.bottom=2;
   gameStart=false;
+  
+
+  //check delle vite
   if (L1.hidden == false){
     if(L2.hidden == false){
       if(L3.hidden == false){
@@ -1802,12 +1823,13 @@ function updateScore() {
 }
 
 function restartGame(){
-  luffy.bottom=2;
   gameStart = true;
   moveBackground();
 }
 
+
 setInterval(updateScore, 100);
+
 
 function moveBackground() {
   bgPosition -= 1;
