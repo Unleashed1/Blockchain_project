@@ -8,7 +8,7 @@ const gameInsights = document.getElementById('game-insights');
 const username = document.getElementById('username');
 
 let jumpInterval;
-let downInterval;
+let scoreInterval;
 
 let up = false;
 //Variabili delle vite
@@ -25,10 +25,7 @@ let bgPosition = 0;
 let s=0;
 let gameStart = false;
 startBtn.disabled = false;
-//Vite visualizzate tutte e 3 almeno finchè non sarà implementato il pagamento
-L1.hidden=false;
-L2.hidden=false;
-L3.hidden=false;
+
 //funzione pagamento
 
 async function makePayment() {
@@ -1704,7 +1701,7 @@ function pickRandomImage(images) {
 async function createObstacle() {
   if (gameStart){
     console.log('create obstacle');
-    s = s+0.8;//+Math.random(0.5,0.8);
+    s = s + 0.8;//+Math.random(0.5,0.8);
 
     const images = obstacleImages.map((imageName) => 'png/' + imageName);
 
@@ -1726,7 +1723,6 @@ async function createObstacle() {
 
 function moveObstacle(obstacle) {
   let obstaclePosition = 1800;
-  //const speed = s;
 
   const moveInterval = setInterval(() => {
     if (obstaclePosition < -150) {
@@ -1742,7 +1738,7 @@ function moveObstacle(obstacle) {
         clearInterval(moveInterval);
       }
       else{
-        updateScore()
+        //updateScore()
         scoreBoard.innerHTML = 'Score: ' + score;
       }
     }
@@ -1750,7 +1746,7 @@ function moveObstacle(obstacle) {
 
 }
 
-setInterval(createObstacle,5000);
+setInterval(createObstacle, 4500);
 
 function checkCollision(obstacle) {
   const luffyRect = luffy.getBoundingClientRect();
@@ -1765,16 +1761,17 @@ function checkCollision(obstacle) {
   console.log(luffyRect.right)*/
 
   return (
-    luffyRect.bottom >= obstacleRect.top &&
+    luffyRect.bottom >= obstacleRect.top + 10 &&
     luffyRect.top <= obstacleRect.bottom &&
-    luffyRect.right >= obstacleRect.left + 30 &&
-    luffyRect.left <= obstacleRect.right
+    luffyRect.right >= obstacleRect.left + 40 &&
+    luffyRect.left <= obstacleRect.right + 10
   );
 }
 
 function endGame() {
   s=5;
   alert('Game Over!');
+  clearInterval(scoreInterval);
   scoreBoard.innerHTML = 'Score: ' + score;
   obstacles.forEach((obstacle) => obstacle.remove());
   obstacles = [];
@@ -1790,14 +1787,14 @@ function endGame() {
       position -= s/2;
       luffy.style.bottom = position + 'px';
     }, 15);
+    
   }
-
-  //luffy.style.bottom = 2 + 'px';
-  //score = 0;
+  // display restart btn
+  restartBtn.disabled = false;
   gameStart=false;
-  
 
   //check delle vite
+
   if (L1.hidden == false){
     if(L2.hidden == false){
       if(L3.hidden == false){
@@ -1808,14 +1805,13 @@ function endGame() {
       }
     } 
     else{
-      L2.hidden = true;
+      L1.hidden = true;
+      score = 0;
+      startBtn.disabled = false;
+      restartBtn.disabled = true;
     } 
   }
-  else{
-    L1.hidden=true;
-  }
-  // display restart btn
-  restartBtn.disabled = false;
+ 
 }
 
 function updateScore() {
@@ -1825,10 +1821,11 @@ function updateScore() {
 function restartGame(){
   gameStart = true;
   moveBackground();
+  scoreInterval = setInterval(updateScore, 250);
 }
 
 
-setInterval(updateScore, 100);
+//setInterval(updateScore, 100);
 
 
 function moveBackground() {
@@ -1854,6 +1851,11 @@ function startGame() {
   startBtn.disabled = true;
     // hide background
   background.style.display = 'none';
+  scoreInterval = setInterval(updateScore, 250);
+  //Vite visualizzate tutte e 3 almeno finchè non sarà implementato il pagamento
+  L1.hidden=false;
+  L2.hidden=false;
+  L3.hidden=false;
 }
 //gameForm.addEventListener('submit', startGame);
 
