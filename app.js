@@ -25,7 +25,6 @@ let bgPosition = 0;
 let s=0;
 let gameStart = false;
 startBtn.disabled = false;
-
 //funzione pagamento
 
 async function makePayment() {
@@ -36,12 +35,10 @@ async function makePayment() {
 
           const accounts = await provider.eth.getAccounts();
           const userAddress = accounts[0];
-
-          const receiverAddress = '0xBcbE47237A6106baD40cfa0B6c970780C4E16B2f';//receiverAddress
+          const receiverAddress = '0x6A3A0eeDe87c645B693F7a4D4d560298f5d0508B';//receiverAddress
 
           const contractABI = [
-            // Include your contract's ABI here
-           {
+            {
   "contractName": "Payment",
   "abi": [
     {
@@ -1608,12 +1605,12 @@ async function makePayment() {
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x9a82fdBb22E6cEE18B1BBBEA0e06ed8BCEA0801e",
-      "transactionHash": "0xec3ca2b4dad2b034def2b85609f48421c12b1f12518f45f5a14b6316a2b39352"
+      "address": "0x6317DAAac97B1B01c0B0ee24bd1dc17b234EA24f",
+      "transactionHash": "0x2158c557e08f9a4a2f05941758b749e2b80ea145d1950a52be53f05544cdfaea"
     }
   },
   "schemaVersion": "3.4.15",
-  "updatedAt": "2023-11-27T16:15:28.072Z",
+  "updatedAt": "2024-01-24T10:52:30.059Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
@@ -1626,17 +1623,17 @@ async function makePayment() {
     "version": 1
   }
 }
-          ];
+];
 
-          const contractAddress = '0x9a82fdBb22E6cEE18B1BBBEA0e06ed8BCEA0801e'; // Replace with your contract's address
+          const contractAddress = '0x352fA2C73DdbB9a684689e62acf5249fB40546d5'; // Replace with your contract's address
 
           const contract = new provider.eth.Contract(contractABI, contractAddress);
-
           contract.methods.makePaymentTo(receiverAddress)
             .send({ from: userAddress, value: provider.utils.toWei('0.1', 'ether') })
             .on('transactionHash', function (hash) {
               console.log('Transaction Hash:', hash);
-              // Transaction sent, handle success or confirmation here
+              alert("Transaction confirmed!")
+
             })
             .on('error', function (error) {
               console.error('Transaction Error:', error);
@@ -1842,7 +1839,8 @@ function moveBackground() {
 
 function startGame() {
   //add the payment function
-  //makePayment()
+ // makePayment()
+
   s=5;
   gameStart = true;
   //e.preventDefault();
