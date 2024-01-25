@@ -28,7 +28,6 @@ startBtn.disabled = false;
 //funzione pagamento
 
 async function makePayment() {
-  alert("aaa");
       if (typeof window.ethereum !== 'undefined') {
         try {
           await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -38,8 +37,9 @@ async function makePayment() {
           const userAddress = accounts[0];
           const receiverAddress = '0x2DA17fae63983FF03cf36b4E1fD87c3516FB3Aab';//receiverAddress
 
-          const contractABI =[];
-          const contractAddress = '0x6317DAAac97B1B01c0B0ee24bd1dc17b234EA24f'; // Replace with your contract's address
+          const contractABI = "./build/contracts/Payment.json";
+          alert(contractABI);
+          const contractAddress = '0x514D9f4530ed5a1940BD59628598cEb1d0f7db1B'; // Replace with your contract's address
 
           const contract = new provider.eth.Contract(contractABI, contractAddress);
           contract.methods.makePaymentTo(receiverAddress)
