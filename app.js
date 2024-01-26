@@ -37,11 +37,21 @@ async function makePayment() {
           const userAddress = accounts[0];
           const receiverAddress = '0x2DA17fae63983FF03cf36b4E1fD87c3516FB3Aab';//receiverAddress
 
-          const contractABI = "./build/contracts/Payment.json";
-          alert(contractABI);
-          const contractAddress = '0x514D9f4530ed5a1940BD59628598cEb1d0f7db1B'; // Replace with your contract's address
+          //const contractABI = fetch("./build/contracts/Payment.json");
+          fetch("./build/contracts/Payment.json")
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            const contractAddress = '0x2a8A75077FC683103026eBfc4558b155FD368f5e'; // Replace with your contract's address
+            console.log(data);
+            const contract = new provider.eth.Contract(data.abi, contractAddress);
+          })
+          .catch(error => {
+            console.error('Fetch error:', error);
+          });
 
-          const contract = new provider.eth.Contract(contractABI, contractAddress);
+
           contract.methods.makePaymentTo(receiverAddress)
             .send({ from: userAddress, value: provider.utils.toWei('1', 'ether') })
             .on('transactionHash', function (hash) {
