@@ -8,12 +8,6 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <script src="back.js"></script>
-<script>
-async function caller(){
-    document.getElementById('start').addEventListener('click', makePayment);
-}
-    </script>
-  <body>
     <div class="container">
       <div class="game-container">
         <div id="game-insights">
@@ -43,7 +37,7 @@ async function caller(){
             />
           </div>
           <div class="btns">
-            <button id="start" type="button" onclick=caller() cursor>Start Game</button>
+            <button id="start" type="button" onclick="makePayment()" cursor>Start Game</button>
             <button id="restart" type="button" disabled cursor>Restart Game</button>
             <!--button id="start">Pause Game </button-->
             <!--button id="start">Resume Game </button-->

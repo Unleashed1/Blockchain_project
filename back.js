@@ -1,6 +1,4 @@
 
-const Web3 = require('web3');
-
 
 async function makePayment() {
   if (typeof window.ethereum !== 'undefined') {
@@ -41,4 +39,3 @@ async function makePayment() {
   }
 }
 
-module.exports = makePayment;
