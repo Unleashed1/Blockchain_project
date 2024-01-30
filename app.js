@@ -25,7 +25,26 @@ let bgPosition = 0;
 let s=0;
 let gameStart = false;
 startBtn.disabled = false;
-//funzione pagamento
+
+//connesione a mongoDB
+const { MongoClient } = require('mongodb');
+const uri = 'mongodb+srv://danmasmac:Blockchain2024@blockchainproject.grlbkxf.mongodb.net/?retryWrites=true&w=majority';
+
+MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+  if (err) {
+    console.error('Errore di connessione al database:', err);
+    return;
+  }
+
+  // La connessione al database è avvenuta con successo
+  const db = client.db();  // ottenere l'istanza del database
+
+  // Ora puoi eseguire operazioni sul database
+  // ...
+
+  // Chiudi la connessione quando hai finito
+  client.close();
+});
 
 
 function jump() {
@@ -253,4 +272,5 @@ function getUsername(e) {
   const name = username.value;
   gameInsights.innerHTML = `Hello ${name}! <br> Use spacebar to jump.`;
 }
+
 
