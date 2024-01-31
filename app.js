@@ -27,10 +27,10 @@ let gameStart = false;
 startBtn.disabled = false;
 
 //connesione a mongoDB
-const { MongoClient } = require('mongodb');
-const uri = 'mongodb+srv://danmasmac:Blockchain2024@blockchainproject.grlbkxf.mongodb.net/?retryWrites=true&w=majority';
+//const { MongoClient } = require('mongodb');
+//const uri = 'mongodb+srv://danmasmac:Blockchain2024@blockchainproject.grlbkxf.mongodb.net/?retryWrites=true&w=majority';
 
-MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+/*MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
   if (err) {
     console.error('Errore di connessione al database:', err);
     return;
@@ -45,7 +45,7 @@ MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (e
   // Chiudi la connessione quando hai finito
   client.close();
 });
-
+*/
 
 function jump() {
   if (!isJumping) {
