@@ -185,13 +185,13 @@ function endGame() {
   }
   //const nome_giocatore = 'NomeGiocatore'; // Sostituisci con il nome del giocatore
   //const punteggio = 1000; // Sostituisci con il punteggio
-
+  const chiave = 'fefe';
   fetch('http://localhost:3000/salva-punteggio', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ score, username, chiave }),
+  body: JSON.stringify({ score, username, chiave}),
   })
   .then(response => response.json())
   .then(data => {
