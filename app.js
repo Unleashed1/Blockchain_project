@@ -1,3 +1,5 @@
+import { inserisciPunteggio, run, stop } from "MongoDB.js";
+
 const luffy = document.getElementById('luffy');
 const gameContainer = document.querySelector('.game-container');
 const background = document.querySelector('.background');
@@ -25,7 +27,6 @@ let bgPosition = 0;
 let s=0;
 let gameStart = false;
 startBtn.disabled = false;
-
 
 function jump() {
   if (!isJumping) {
@@ -185,7 +186,7 @@ function endGame() {
   }
   //const nome_giocatore = 'NomeGiocatore'; // Sostituisci con il nome del giocatore
   //const punteggio = 1000; // Sostituisci con il punteggio
-  const chiave = 'fefe';
+  /*const chiave = 'fefe';
   fetch('http://localhost:3000/salva-punteggio', {
   method: 'POST',
   headers: {
@@ -200,7 +201,17 @@ function endGame() {
   .catch(error => {
     console.error('Errore durante la richiesta al server:', error);
   });
- 
+ */
+  //use('LuffyRunScore');
+  // Insert a few documents into the sales collection.
+  run().then(() => {
+    // Inserisci un punteggio
+    inserisciPunteggio('John', 1500);
+  
+    // Chiudi la connessione a MongoDB
+    stop();
+  }).catch(console.error);
+  
 }
 
 function updateScore() {
@@ -248,8 +259,8 @@ function startGame() {
 }
 //gameForm.addEventListener('submit', startGame);
 
-startBtn.addEventListener('click',startGame)
-restartBtn.addEventListener('click',restartGame)
+startBtn.addEventListener('click',startGame);
+restartBtn.addEventListener('click',restartGame);
 
 //gameForm.addEventListener('restart', restartGame); 
 
