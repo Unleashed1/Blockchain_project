@@ -32,12 +32,12 @@ app.post('/salva-punteggio', (req, res) => {
 });
 
 // Porta su cui il server ascolta
-const PORT = 3000;
+const PORT = 3306;
 
 // Avvia il server
 app.listen(PORT, () => {
   console.log('Server in ascolto sulla porta ${PORT}');
 });
-﻿
+
 
 

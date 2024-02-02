@@ -1,13 +1,14 @@
-import { inserisciPunteggio, run, stop } from "MongoDB.js";
-
 const luffy = document.getElementById('luffy');
 const gameContainer = document.querySelector('.game-container');
 const background = document.querySelector('.background');
 const gameForm = document.getElementById('game-form');
 const startBtn = document.getElementById('start');
+const mintBtn = document.getElementById('mint');
 const restartBtn = document.getElementById('restart');
 const gameInsights = document.getElementById('game-insights');
 const username = document.getElementById('username');
+
+let payment = true;
 
 let jumpInterval;
 let scoreInterval;
@@ -27,6 +28,7 @@ let bgPosition = 0;
 let s=0;
 let gameStart = false;
 startBtn.disabled = false;
+mintBtn.disabled = true;
 
 function jump() {
   if (!isJumping) {
@@ -143,7 +145,6 @@ function checkCollision(obstacle) {
 
 function endGame() {
   s=5;
-  alert('Game Over!');
   clearInterval(scoreInterval);
   scoreBoard.innerHTML = 'Score: ' + score;
   obstacles.forEach((obstacle) => obstacle.remove());
@@ -164,6 +165,7 @@ function endGame() {
   }
   // display restart btn
   restartBtn.disabled = false;
+  mintBtn.disabled = false;
   gameStart=false;
 
   //check delle vite
@@ -172,27 +174,32 @@ function endGame() {
     if(L2.hidden == false){
       if(L3.hidden == false){
         L3.hidden=true;
+        alert('OH no, you lose one life!');
       }
       else{
         L2.hidden = true;
+        alert('OH no, you lose one life!');
       }
     } 
     else{
       L1.hidden = true;
+      alert('Game Over!');
       score = 0;
       startBtn.disabled = false;
       restartBtn.disabled = true;
+      mintBtn.disabled = true;
+      payment=false;
     } 
   }
   //const nome_giocatore = 'NomeGiocatore'; // Sostituisci con il nome del giocatore
   //const punteggio = 1000; // Sostituisci con il punteggio
-  /*const chiave = 'fefe';
-  fetch('http://localhost:3000/salva-punteggio', {
+  const chiave = 'fefe';
+  fetch('http://localhost:8080/salva-punteggio', {
   method: 'POST',
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   },
-  body: JSON.stringify({ score, username, chiave}),
+  body: JSON.stringify({ chiave, score, username}),
   })
   .then(response => response.json())
   .then(data => {
@@ -201,17 +208,6 @@ function endGame() {
   .catch(error => {
     console.error('Errore durante la richiesta al server:', error);
   });
- */
-  //use('LuffyRunScore');
-  // Insert a few documents into the sales collection.
-  run().then(() => {
-    // Inserisci un punteggio
-    inserisciPunteggio('John', 1500);
-  
-    // Chiudi la connessione a MongoDB
-    stop();
-  }).catch(console.error);
-  
 }
 
 function updateScore() {
@@ -242,28 +238,38 @@ function moveBackground() {
 
 function startGame() {
 
+  if (payment){
+    s=5;
+    gameStart = true;
+    //e.preventDefault();
+    moveBackground();
+    //createObstacle();
+    startBtn.disabled = true;
+    mintBtn.disabled = false;
+      // hide background
+    background.style.display = 'none';
+    scoreInterval = setInterval(updateScore, 250);
+    //Vite visualizzate tutte e 3 almeno finchè non sarà implementato il pagamento
+    L1.hidden=false;
+    L2.hidden=false;
+    L3.hidden=false;
+  }else{
+    alert("E' necessario il pagamento per poter giocare!");
+  }
 
-  s=5;
-  gameStart = true;
-  //e.preventDefault();
-  moveBackground();
-  //createObstacle();
-  startBtn.disabled = true;
-    // hide background
-  background.style.display = 'none';
-  scoreInterval = setInterval(updateScore, 250);
-  //Vite visualizzate tutte e 3 almeno finchè non sarà implementato il pagamento
-  L1.hidden=false;
-  L2.hidden=false;
-  L3.hidden=false;
+  
 }
 //gameForm.addEventListener('submit', startGame);
 
 startBtn.addEventListener('click',startGame);
 restartBtn.addEventListener('click',restartGame);
+mintBtn.addEventListener('click',mintScore);
 
-//gameForm.addEventListener('restart', restartGame); 
+function mintScore(){
+//aggiornare il db con il nuovo punteggio se è un nuovo record e salvarlo
+//generare la chiave e darla al giocatore
 
+}
 
 document.getElementById
 // jump luffy on click space

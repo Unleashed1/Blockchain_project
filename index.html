@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <script src="back.js"></script>
+
     <div class="container">
       <div class="game-container">
         <div id="game-insights">
@@ -38,8 +39,7 @@
           </div>
           <div class="btns">
             <button id="start" type="button" onclick="makePayment()" cursor>Start Game</button>
-            <button id="mint" type="button" onclick="keygen()" cursor>Mint your score!</button>
-
+            <button id="mint" type="button" disabled onclick="keygen()" cursor>Mint your score!</button>
             <button id="restart" type="button" disabled cursor>Restart Game</button>
             <!--button id="start">Pause Game </button-->
             <!--button id="start">Resume Game </button-->
@@ -108,7 +108,6 @@ By clicking on Start game a payment will be made using metamask <br> which will 
     </div>
       <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
     <script src="app.js"></script>
-    <script src="MongoDB.js"></script>
 
   </body>
 </html>
