@@ -7,15 +7,16 @@ async function ottieniDati() {
 
   dati.forEach((dato) => {
     const listItem = document.createElement('li');
-    listItem.textContent = `Campo 1: ${dato.campo1}, Campo 2: ${dato.campo2}`;
+    listItem.textContent = `score: ${dato.score}, nickname: ${dato.username}`;
     elencoDati.appendChild(listItem);
   });
 }
 
 // Funzione per aggiungere nuovi dati al server
 async function aggiungiDati() {
-  const campo1 = document.getElementById('score').value;
-  const campo2 = document.getElementById('username').value;
+  const score = document.getElementById('score').value;
+  const nickname = document.getElementById('username').value;
+  const chiave = 'shbey'
 
   await fetch('http://localhost:3000/api/dati', {
     method: 'POST',
@@ -23,7 +24,7 @@ async function aggiungiDati() {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ campo1, campo2 }),
+    body: JSON.stringify({ score, nickname , chiave}),
   });
 
   // Dopo aver aggiunto i dati, ottieni e visualizza l'elenco aggiornato

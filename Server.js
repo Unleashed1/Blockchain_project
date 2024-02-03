@@ -9,9 +9,9 @@ app.use(cors());
 // Configura la connessione al database MySQL
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
+  user: 'server',
   password: 'Blockchain2024!',
-  database: 'luffyrunscore',
+  database: 'LuffyRunScore',
 });
 
 // Connessione al database
@@ -23,7 +23,7 @@ connection.connect((err) => {
   console.log('Connesso al database MySQL');
 });
 //creazione tabella
-app.post('/api/dati', (req, res) => {
+/*app.post('/api/dati', (req, res) => {
   const query = 'CREATE TABLE runscores (`score` int NOT NULL,`nickname` varchar(255) NOT NULL,`chiave` varchar(255) NOT NULL, PRIMARY KEY (`chiave`), UNIQUE KEY `score` (`score`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;';
 
   connection.query(query,  (err, results, fields) => {
@@ -34,7 +34,7 @@ app.post('/api/dati', (req, res) => {
     }
     res.json({ success: true });
   });
-});
+});*/
 
 // Middleware per gestire i dati JSON
 app.use(express.json());
@@ -54,9 +54,9 @@ app.get('/api/dati', (req, res) => {
 
 // API per aggiungere dati al database
 app.post('/api/dati', (req, res) => {
-  const { campo1, campo2 } = req.body;
-  const query = 'INSERT INTO runscores (campo1, campo2) VALUES (?, ?)';
-  const values = [campo1, campo2];
+  const { score, nickname, chiave } = req.body;
+  const values = [score, nickname, chiave];
+  const query = 'INSERT INTO runscores (score, nickname, chiave) VALUES ('+values[0]+values[1]+values[2]+');';
 
   connection.query(query, values, (err, results, fields) => {
     if (err) {
