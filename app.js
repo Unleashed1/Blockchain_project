@@ -8,7 +8,7 @@ const restartBtn = document.getElementById('restart');
 const gameInsights = document.getElementById('game-insights');
 const username = document.getElementById('username');
 
-let payment = true;
+let payment=startBtn.onclick();
 
 let jumpInterval;
 let scoreInterval;
@@ -193,8 +193,8 @@ function endGame() {
   }
   //const nome_giocatore = 'NomeGiocatore'; // Sostituisci con il nome del giocatore
   //const punteggio = 1000; // Sostituisci con il punteggio
-  const chiave = 'fefe';
-  fetch('http://localhost:8080/salva-punteggio', {
+  /*const chiave = 'fefe';
+  fetch('http://localhost:8080', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -208,6 +208,10 @@ function endGame() {
   .catch(error => {
     console.error('Errore durante la richiesta al server:', error);
   });
+  fetch("http://localhost:8080")
+        .then(function (response) {
+          return console.log(response.json());
+        })*/
 }
 
 function updateScore() {
@@ -238,7 +242,7 @@ function moveBackground() {
 
 function startGame() {
 
-  if (payment){
+  if (!payment){
     s=5;
     gameStart = true;
     //e.preventDefault();

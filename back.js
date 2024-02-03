@@ -23,19 +23,24 @@ async function makePayment() {
             .on('transactionHash', function (hash) {
               console.log('Transaction Hash:', hash);
               alert("Transaction confirmed!");
+              return true;
             })
             .on('error', function (error) {
               console.error('Transaction Error:', error);
+              return false;
             });
         })
         .catch(error => {
           console.error('Fetch error:', error);
+          return false;
         });
     } catch (error) {
       console.error('MetaMask account access denied or error:', error);
+      return false;
     }
   } else {
     console.error('MetaMask not detected');
+    return false;
   }
 }
 
@@ -73,3 +78,15 @@ async function keygen(){
  }
 }
 
+/*
+function handlePayment() {
+  makePayment().then((result) => {
+    // Utilizza il valore di ritorno come desiderato
+    console.log(result);
+
+    // Esegui altre operazioni con il valore di ritorno, se necessario
+  }).catch((error) => {
+    // Gestisci eventuali errori durante il pagamento
+    console.error(error);
+  });
+}*/
