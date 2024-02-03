@@ -17,7 +17,24 @@ async function aggiungiDati() {
   const score = document.getElementById('score').value;
   const nickname = document.getElementById('username').value;
   const chiave = 'shbey'
-
+  try {
+    const response = await fetch('http://localhost:3000/api/dati', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ score, nickname, chiave }),
+    });
+  
+    if (!response.ok) {
+      throw new Error('Errore nella richiesta: ${response.status} ${response.statusText}');
+    }
+  
+    // Continua con la gestione della risposta
+  } catch (error) {
+    console.error('Errore durante la richiesta:', error.message);
+  }
+  /*
   await fetch('http://localhost:3000/api/dati', {
     method: 'POST',
     mode: 'no-cors',
@@ -25,7 +42,7 @@ async function aggiungiDati() {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ score, nickname , chiave}),
-  });
+  });*/
 
   // Dopo aver aggiunto i dati, ottieni e visualizza l'elenco aggiornato
   ottieniDati();
