@@ -7,7 +7,7 @@ const mintBtn = document.getElementById('mint');
 const restartBtn = document.getElementById('restart');
 const gameInsights = document.getElementById('game-insights');
 const username = document.getElementById('username').value;
-const chiave = 'exrctvyb';
+const chiave = 'ccfggbfsef';
 
 
 
