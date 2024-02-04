@@ -55,20 +55,22 @@ async function keygen(){
 
  fetch("./build/contracts/Keygen.json")
         .then(function (response) {
+          console.log('1');
           return response.json();
         })
         .then(async function (data) {
         const contractAddress = '0x25f8C5a25A54D3A6d9F714D91D531Ee7B6547597';
         const contract = new provider.eth.Contract(data.abi, contractAddress);
-        const inputString = document.getElementById("username").value;
+        const inputString = document.getElementById("username").value + document.getElementById('score').value;
 
         try {
             const result = await contract.methods.generateKeccak256(inputString).call();
 
             // Display the result in the HTML
-            key =result // modif this and put in db
+            let key = result; // modif this and put in db
             makePayment();
             console.log("key generata:", key);
+            return key;
         } catch (error) {
             console.error("Error:", error);
         }        })

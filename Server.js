@@ -19,6 +19,14 @@ connection.connect((err) => {
   if (err) {
     console.error('Errore di connessione al database:', err);
     return;
+  }else{
+    const query = 'CREATE TABLE IF NOT EXISTS `runscores` ( `score` int NOT NULL, `nickname` varchar(255) NOT NULL,`chiave` varchar(255) NOT NULL, PRIMARY KEY (`chiave`), UNIQUE KEY `score` (`score`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;'
+    connection.query(query, (err, results, fields) => {
+      if (err) {
+        console.error('Errore durante l\'esecuzione della query:', err);
+        return;
+      }
+    });
   }
   console.log('Connesso al database MySQL');
 });
