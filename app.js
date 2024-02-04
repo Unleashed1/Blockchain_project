@@ -6,7 +6,10 @@ const startBtn = document.getElementById('start');
 const mintBtn = document.getElementById('mint');
 const restartBtn = document.getElementById('restart');
 const gameInsights = document.getElementById('game-insights');
-const username = document.getElementById('username');
+const username = document.getElementById('username').value;
+const chiave = 'exrctvyb';
+
+
 
 let payment=startBtn.onclick();
 
@@ -143,7 +146,7 @@ function checkCollision(obstacle) {
   );
 }
 
-function endGame() {
+async function endGame() {
   s=5;
   clearInterval(scoreInterval);
   scoreBoard.innerHTML = 'Score: ' + score;
@@ -161,7 +164,7 @@ function endGame() {
       position -= s/2;
       luffy.style.bottom = position + 'px';
     }, 15);
-    
+    up=false;
   }
   // display restart btn
   restartBtn.disabled = false;
@@ -184,12 +187,14 @@ function endGame() {
     else{
       L1.hidden = true;
       alert('Game Over!');
-      score = 0;
       startBtn.disabled = false;
       restartBtn.disabled = true;
       mintBtn.disabled = true;
       payment=false;
+      mintScore();
+      score = 0;
     } 
+
   }
   //const nome_giocatore = 'NomeGiocatore'; // Sostituisci con il nome del giocatore
   //const punteggio = 1000; // Sostituisci con il punteggio
@@ -269,10 +274,28 @@ startBtn.addEventListener('click',startGame);
 restartBtn.addEventListener('click',restartGame);
 mintBtn.addEventListener('click',mintScore);
 
-function mintScore(){
+async function mintScore(){
 //aggiornare il db con il nuovo punteggio se è un nuovo record e salvarlo
 //generare la chiave e darla al giocatore
+try {
+  console.log(JSON.stringify({ score, username, chiave }))
 
+  const response = await fetch('http://localhost:3000/api/dati', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ score, username, chiave })
+  });
+
+  if (!response.ok) {
+    throw new Error('Errore nella richiesta: '+ response.status + ' ' + response.statusText);
+  }
+
+  // Continua con la gestione della risposta
+} catch (error) {
+  console.error('Errore durante la richiesta:', error.message);
+}
 }
 
 document.getElementById

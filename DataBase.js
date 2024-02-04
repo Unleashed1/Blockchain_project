@@ -1,14 +1,14 @@
 async function ottieniDati() {
   const response = await fetch('http://localhost:3000/api/dati');
   const dati = await response.json();
-
-  const elencoDati = document.getElementById('elencoDati');
+  const elencoDati = document.getElementById('rankTable');
   elencoDati.innerHTML = '';
-
+  let num = 1;
   dati.forEach((dato) => {
-    const listItem = document.createElement('li');
-    listItem.textContent = `score: ${dato.score}, nickname: ${dato.username}`;
+    const listItem = document.createElement('ol');
+    listItem.textContent = num +`. ${dato.nickname} - ${dato.score}`;
     elencoDati.appendChild(listItem);
+    num++
   });
 }
 
@@ -49,7 +49,7 @@ async function aggiungiDati() {
 }
 
 // Chiamare la funzione per ottenere e visualizzare i dati all'avvio dell'app
-ottieniDati();
+//ttieniDati();
 
 /*async function inviaDati() {
   const dato1 = 'valore1';

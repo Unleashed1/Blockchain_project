@@ -52,11 +52,31 @@ app.get('/api/dati', (req, res) => {
   });
 });
 
+app.post('/api/dati', (req, res) => {
+  const { score, username, chiave } = req.body;
+
+  // Utilizza i segnaposto nella query per evitare SQL injection
+  const query = 'INSERT INTO runscores (score, nickname, chiave) VALUES (?, ?, ?)';
+
+  const values = [score, username, chiave];
+
+  connection.query(query, values, (err, results, fields) => {
+    if (err) {
+      console.error('Errore durante l\'esecuzione della query:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+
+    res.json({ success: true });
+  });
+});
+/*
 // API per aggiungere dati al database
 app.post('/api/dati', (req, res) => {
-  const { score, nickname, chiave } = req.body;
-  const values = [score, nickname, chiave];
-  const query = 'INSERT INTO runscores (score, nickname, chiave) VALUES ('+values[0]+values[1]+values[2]+');';
+  const { score, username, chiave } = req.body;
+  const values = [score, username, chiave];
+  console.log(values);
+  const query = 'INSERT INTO runscores VALUES ('+values[0]+','+'"'+values[1]+'"'+','+'"'+values[2]+'"'+');';
 
   connection.query(query, values, (err, results, fields) => {
     if (err) {
@@ -66,7 +86,7 @@ app.post('/api/dati', (req, res) => {
     }
     res.json({ success: true });
   });
-});
+});*/
 
 // Altre API per aggiornare e eliminare dati possono essere aggiunte secondo necessità
 

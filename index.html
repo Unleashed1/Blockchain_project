@@ -74,18 +74,42 @@ By clicking on Start game a payment will be made using metamask <br> which will 
 <tr>
   <script src="DataBase.js"></script>
 <script>
-  aggiungiDati();
-  const data = [];
-
-  const table = document.getElementById('rankTable');
-  let row, cell, colCounter = 0;
-
+  ottieniDati();
+  //const table = document.getElementById('rankTable');
+/*
+  function creaListaNumerata() {
+  // Creazione dell'elemento ol (ordered list).
+  const listaNumerata = document.createElement('ol');
+  console.log(data);
+  // Ciclo per attraversare gli oggetti nel array e creare gli elementi li (list item).
   for (let i = 0; i < data.length; i++) {
+    const utente = data[i];
+    console.log(utente);
+    // Creazione dell'elemento li con username e punteggio.
+    const elementoLi = document.createElement('li');
+    elementoLi.textContent = '${utente.nickname} - ${utente.punteggio}';
+
+    // Aggiunta dell'elemento li all'ol.
+    listaNumerata.appendChild(elementoLi);
+  }
+
+  // Aggiunta dell'ol al contenitore con id "listaContainer".
+  table.appendChild(listaNumerata);
+}
+
+// Chiamata della funzione per creare la lista numerata al caricamento della pagina.
+creaListaNumerata();
+/*
+  let row, cell, colCounter = 0, num = 1;
+  for (let i = 0; i < data.length; i++) {
+    num++;
     if (colCounter === 0) {
-      row = table.insertRow();
+      row = num + table.insertRow();
+      console.log(row);
     }
 
-    cell = row.insertCell();
+    cell = num + row.insertCell();
+    console.log(cell);
     const entryParts = data[i]
     //aggiungere check sulk'input dell'username e mettere al massimo 8 caratteri o 10
     cell.textContent = entryParts // Display the number as the rank
@@ -94,7 +118,7 @@ By clicking on Start game a payment will be made using metamask <br> which will 
     if (colCounter === 5) {
       colCounter = 0;
     }
-  }
+  }*/
 
 </script>
           </div>
