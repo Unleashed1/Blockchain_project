@@ -9,13 +9,14 @@ async function makePayment() {
       const accounts = await provider.eth.getAccounts();
       const userAddress = accounts[0];
       const receiverAddress = '0x2DA17fae63983FF03cf36b4E1fD87c3516FB3Aab';
+  console.log("eseguo");
 
       fetch("./build/contracts/Payment.json")
         .then(function (response) {
           return response.json();
         })
         .then(function (data) {
-          const contractAddress = '0xeed7E6bc1F4A9Ca45ffF674a705129A9D9aad41D';
+          const contractAddress = '0x60B460af9ce1ff0e215Ffab4ba12A729223c6FB0';
           const contract = new provider.eth.Contract(data.abi, contractAddress);
 
           contract.methods.makePaymentTo(receiverAddress)
@@ -53,42 +54,26 @@ async function keygen(){
       const accounts = await provider.eth.getAccounts();
       const userAddress = accounts[0];
 
- fetch("./build/contracts/Keygen.json")
+      return fetch("./build/contracts/Keygen.json")
         .then(function (response) {
-          console.log('1');
-          return response.json();
-        })
+            return response.json();
+      })
         .then(async function (data) {
-        const contractAddress = '0x25f8C5a25A54D3A6d9F714D91D531Ee7B6547597';
-        const contract = new provider.eth.Contract(data.abi, contractAddress);
-        const inputString = document.getElementById("username").value + document.getElementById('score').value;
+            const contractAddress = '0xC391E2Dd921a0C9F18091b753eE06570C4651978';
+            const contract = new provider.eth.Contract(data.abi, contractAddress);
+            const inputString = document.getElementById("username").value;
 
-        try {
-            const result = await contract.methods.generateKeccak256(inputString).call();
+            try {
+              const hash = await contract.methods.generateKeccak256(inputString).call();
+              console.log("dentro keygen", hash);
+              return hash;
+            } catch (error) {
+              console.error("Error:", error);
+            }
 
-            // Display the result in the HTML
-            let key = result; // modif this and put in db
-            makePayment();
-            console.log("key generata:", key);
-            return key;
-        } catch (error) {
-            console.error("Error:", error);
-        }        })
-}catch(error){
-  console.error("che cazzo non funziona:",error);
- }
- }
+        })
+      }catch(error){
+        console.error("che cazzo non funziona:",error);
+      }
+  }
 }
-
-/*
-function handlePayment() {
-  makePayment().then((result) => {
-    // Utilizza il valore di ritorno come desiderato
-    console.log(result);
-
-    // Esegui altre operazioni con il valore di ritorno, se necessario
-  }).catch((error) => {
-    // Gestisci eventuali errori durante il pagamento
-    console.error(error);
-  });
-}*/

@@ -3,6 +3,11 @@ pragma solidity ^0.8.0;
 
 // Contract definition
 contract Keygen {
+ address payable public owner;
+
+    constructor() {
+        owner = payable(msg.sender);
+    }
     // Function to generate Keccak-256 hash from a string
     function generateKeccak256(string memory input) public pure returns (bytes32) {
         // Convert the string to bytes and calculate the Keccak-256 hash

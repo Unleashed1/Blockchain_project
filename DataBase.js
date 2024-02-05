@@ -6,7 +6,7 @@ async function ottieniDati() {
   let num = 1;
   dati.forEach((dato) => {
     const listItem = document.createElement('ol');
-    listItem.textContent = num +`. ${dato.nickname} - ${dato.score}`;
+    listItem.textContent = num +`. ${dato.username} - ${dato.score}`;
     elencoDati.appendChild(listItem);
     num++
   });
@@ -15,7 +15,7 @@ async function ottieniDati() {
 // Funzione per aggiungere nuovi dati al server
 async function aggiungiDati() {
   const score = document.getElementById('score').value;
-  const nickname = document.getElementById('username').value;
+  const username = document.getElementById('username').value;
   const chiave = 'shbey'
   try {
     const response = await fetch('http://localhost:3000/api/dati', {
@@ -23,7 +23,7 @@ async function aggiungiDati() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ score, nickname, chiave }),
+      body: JSON.stringify({ score, username, chiave }),
     });
   
     if (!response.ok) {
