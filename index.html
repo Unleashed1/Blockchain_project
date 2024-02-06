@@ -45,22 +45,7 @@
             <button id="restart" type="button" disabled cursor>Restart Game</button>
             <script>
               var score;
-/*
-              async function ottieniDati() {
-                const response = await fetch('http://localhost:3000/api/dati');
-                const dati = await response.json();
-                const table = document.getElementById('rankTable');
-                dati.forEach((dato) => {
-                const listItem = document.createElement('ol');
-                listItem.textContent = num +`. ${dato.username} - ${dato.score}`;
-                elencoDati.appendChild(listItem);
-                num++
-              });
-
-
-              }
-              console.log(dati);*/
-
+              
               function startBtnEvent(){
                 makePayment()
                 .then(x => startGame());
@@ -75,7 +60,7 @@
                   data={
                   "username": username,
                   "score": score,
-                  "chiave": 'fgctrdfch'//chiave
+                  "chiave": chiave
                   }
                   console.log(data);
                    fetch("http://127.0.0.1:3000/api/dati", {
@@ -138,59 +123,48 @@
           <table class="mainTable">
           <tr>
           <th>
-<table id="rankTable" class="rankTable">
-  <thead>
-    <tr>
-      <th>Highest</th>
-      <th>Score!</th>
-      <script>
-        /*
-        // Dimensioni della matrice
-        var n=0; // Numero di righe
-        var cols = 2; // Numero di colonne
-      
-        // Funzione per generare la matrice numerata
-        function generateNumberedMatrix(rows, cols) {
-          var table = document.getElementById('rankTable');
-          //table += '<tr><th></th>'; // Cella vuota per l'angolo in alto a sinistra
-      
-          // Intestazione delle colonne numerate
-          //for (var j = 1; j <= cols; j++) {
-          //  table += '<th>' + j + '</th>';
-          //}
-      
-          //table += '</tr>';
-      
-          // Contenuto della matrice con numeri di riga e colonne
-          dati.forEach((dato) =>{
-            table += '<tr>';
-            table += '<th>'+n+' '+ dato.nikname - ${dato.score}
-          }
-          for (var i = 1; i <= rows; i++) {
-            table += '<tr>';
-            table += '<th>' + i + dati[1]+' - '+ dati[0]+'</th>'; // Numero di riga
-      
-            for (var j = 1; j <= cols; j++) {
-              table += '<td>' + (i * cols + j) + '</td>'; // Calcolo del numero nella cella
-            }
-      
-            table += '</tr>';
-          }
-      
-          table += '</table>';
-      
-          return table;
-        }
-      
-        // Inserisci la matrice numerata nella pagina HTML
-        document.body.innerHTML += generateNumberedMatrix(rows, cols);*/
-      </script>
-      
-    </tr>
-  </thead>
-  <tbody id="tableBody">
-  </tbody>
-</table>
+            <table id="rankTable" class="rankTable">
+              <thead>
+                <tr>
+                  <th>Highest</th>
+                  <th>Nickname</th>
+                  <th>Score</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody">
+              </tbody>
+            </table>
+            
+            <script>
+              async function ottieniDati() {
+                const response = await fetch('http://localhost:3000/api/dati');
+                const dati = await response.json();
+                let tableBody = document.getElementById('tableBody');
+                tableBody.innerHTML = '';
+                let num = 1;
+            
+                for (let i = 0; i < dati.length; i += 3) {
+                  let row = '<tr>';
+                  for (let j = i; j < i + 3; j++) {
+                    if (j < dati.length) {
+                      const dato = dati[j];
+                      row += '<td>' + num + '</td>';
+                      row += '<td>' + dato.username + '</td>';
+                      row += '<td>' + dato.score + '</td>';
+                      num++;
+                    } else {
+                      // Aggiungi colonne vuote se non ci sono dati sufficienti per completare la riga
+                      row += '<td></td><td></td><td></td>';
+                    }
+                  }
+                  row += '</tr>';
+                  tableBody.innerHTML += row;
+                }
+              }
+              ottieniDati();
+            </script>
+            
+
 </th>
 
 <th>
