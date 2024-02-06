@@ -62,7 +62,6 @@
 
             </script>
           </div>
-          <!-- da sismtemare tabella con css corretti-->
           <div>
           <p></p>
           <table class="mainTable">
@@ -71,9 +70,9 @@
             <table id="rankTable" class="rankTable">
               <thead>
                 <tr>
-                  <th>Highest</th>
-                  <th>Nickname</th>
-                  <th>Score</th>
+                  <th>Highest  </th>
+                  <th>Nickname </th>
+                  <th>Score </th>
                 </tr>
               </thead>
               <tbody id="tableBody">
@@ -88,25 +87,21 @@
                 tableBody.innerHTML = '';
                 let num = 1;
 
-                // Limit the number of records to display to the first 10
-                const first10Dati = dati.slice(0, 10);
+                const first4Dati = dati.slice(0, 4);
 
-                for (let i = 0; i < first10Dati.length; i += 2) {
+                for (let i = 0; i < first4Dati.length; i ++) {
                   let row = '<tr>';
-                  for (let j = i; j < i + 2; j++) {
-                    if (j < first10Dati.length) {
-                      const dato = first10Dati[j];
-                      row += '<td>' + num + '</td>';
-                      row += '<td>' + dato.username + '</td>';
-                      row += '<td>' + dato.score + '</td>';
-                      num++;
-                    } else {
-                      // Add empty columns if there are not enough data to complete the row
-                      row += '<td></td><td></td><td></td>';
-                    }
+                  if (i < first4Dati.length) {
+                    const dato = first4Dati[i];
+                    row += '<td>' + num + '</td>';
+                    row += '<td>' + dato.username + '</td>';
+                    row += '<td>' + dato.score + '</td>';
+                    num++;
+                  } else {
+                    row += '<td></td><td></td><td></td>';
                   }
-                  row += '</tr>';
-                  tableBody.innerHTML += row;
+                row += '</tr>';
+                tableBody.innerHTML += row;
                 }
               }
 
@@ -118,8 +113,7 @@
 
 <th>
 
-<h1>How to play?
-</h1>
+<h1>How to play?</h1>
 <p>
 Playing this game is simple, just use the space bar!
 By clicking on Start game a payment will be made using metamask <br> which will allow you to receive 3 lives which you can use to get the highest score! <br>If you get tired you can also pause and resume whenever you want!</p>
@@ -128,7 +122,6 @@ By clicking on Start game a payment will be made using metamask <br> which will 
 
 
 <tr>
-  <script src="DataBase.js"></script>
  <script src="app.js"></script>
           </div>
         </form>

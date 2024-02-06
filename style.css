@@ -1,107 +1,111 @@
 body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; */
-    background-color: #3e8b6c;
-  }
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; */
+  background-color: #3e8b6c;
+}
 
-  *{
-    box-sizing: border-box;
-    font-family: monospace;
-  }
+th, td{
+  padding: 5;
+}
+
+*{
+  box-sizing: border-box;
+  font-family: monospace;
+}
   
-  .game-container {
-    position: relative;
-    height: 70vh;
-    /* margin: 25vh auto; */
-    /* border: 1px dashed #000; */
-    background: url("./bg.gif") repeat-x;
-    background-size: 100% 100%;
-    background-position: bottom;
-    margin-bottom: 20px;
-  }
+.game-container {
+  position: relative;
+  height: 70vh;
+  /* margin: 25vh auto; */
+  /* border: 1px dashed #000; */
+  background: url("./bg.gif") repeat-x;
+  background-size: 100% 100%;
+  background-position: bottom;
+  margin-bottom: 20px;
+}
+
+#luffy {
+  position: absolute;
+  bottom: 2px;
+  width: 160px;
+  height: 160px;
+  /*border: 2px solid #ccc;*/
+
+}
+
+.obstacle {
+  position: absolute;
+  bottom: 2px;
+  /*left: 800px;*/
+  /*width: 125px;*/
+  height: 140px;
+  /*border: 2px solid #ccc;*/
+
+}
+
+.container{
+  /* max-width: 1200px; */
+  width: 100%;
+  padding: 0px;
+  margin: 0 auto;
+}
   
-  #luffy {
-    position: absolute;
-    bottom: 2px;
-    width: 160px;
-    height: 160px;
-    /*border: 2px solid #ccc;*/
 
-  }
-  
-  .obstacle {
-    position: absolute;
-    bottom: 2px;
-    /*left: 800px;*/
-    /*width: 125px;*/
-    height: 140px;
-    /*border: 2px solid #ccc;*/
+.flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+input{
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 0 16px;
+  font-size: 16px;
+  margin-left: 16px;
+}
+label{
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
 
-  }
-
-  .container{
-    /* max-width: 1200px; */
-    width: 100%;
-    padding: 0px;
-    margin: 0 auto;
-  }
-  
-
-  .flex{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  input{
-    width: 100%;
-    height: 45px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    padding: 0 16px;
-    font-size: 16px;
-    margin-left: 16px;
-  }
-  label{
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-
-  #start, #restart, #mint{
-    width: 100%;
-    height: 35px;
-    border-radius: 5px;
-    border: 2px solid #ccc;
-    padding: 0 16px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color:#ffbf00;
-    color: black;
-    font-size: 18px;
-  }
+#start, #restart, #mint{
+  width: 100%;
+  height: 35px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  padding: 0 16px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color:#ffbf00;
+  color: black;
+  font-size: 18px;
+}
 .mainTable{
   border-style: dashed solid;
   align-items: center;
   width: 100%;
 
 }
-  .background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .background::before{
