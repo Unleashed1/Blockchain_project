@@ -22,7 +22,7 @@ const L3 = document.getElementById("L3");
 const scoreBoard = document.getElementById('score');
 
 let isJumping = false;
-let score = 0;
+score = 0;
 let obstacles = [];
 let bgPosition = 0;
 let s=0;
@@ -197,7 +197,7 @@ function updateScore() {
 function restartGame(){
   gameStart = true;
   moveBackground();
-  mintBtn.disabled=false;
+  mintBtn.disabled=true;
   scoreInterval = setInterval(updateScore, 250);
 }
 
@@ -225,7 +225,7 @@ function startGame() {
   moveBackground();
   //createObstacle();
   startBtn.disabled = true;
-  mintBtn.disabled = false;
+  mintBtn.disabled = true;
     // hide background
   background.style.display = 'none';
   scoreInterval = setInterval(updateScore, 250);
