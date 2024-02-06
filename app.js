@@ -181,7 +181,7 @@ async function endGame() {
       alert('Game Over!');
       startBtn.disabled = false;
       restartBtn.disabled = true;
-      mintBtn.disabled = true;
+      mintBtn.disabled = false;
       payment=false;
       mintScore();
       score = 0;
@@ -240,11 +240,12 @@ function startGame() {
 restartBtn.addEventListener('click',restartGame);
 //mintBtn.addEventListener('click',mintScore);
 
-async function mintScore(){
+async function mintScore(chiave){
 //aggiornare il db con il nuovo punteggio se è un nuovo record e salvarlo
 //generare la chiave e darla al giocatore
   gameStart=false;
   restartBtn.disabled=false;
+  const username = document.getElementById('username').value;
   try {
     console.log(JSON.stringify({ score, username, chiave }))
 
@@ -274,7 +275,9 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-
+function getScore(){
+  return score;
+}
 // get username
 function getUsername(e) {
   e.preventDefault();

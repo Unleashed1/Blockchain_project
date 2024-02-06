@@ -9,7 +9,6 @@ async function makePayment() {
       const accounts = await provider.eth.getAccounts();
       const userAddress = accounts[0];
       const receiverAddress = '0x2DA17fae63983FF03cf36b4E1fD87c3516FB3Aab';
-  console.log("eseguo");
 
       fetch("./build/contracts/Payment.json")
         .then(function (response) {
@@ -23,8 +22,7 @@ async function makePayment() {
             .send({ from: userAddress, value: provider.utils.toWei('1', 'ether') })
             .on('transactionHash', function (hash) {
               console.log('Transaction Hash:', hash);
-              alert("Transaction confirmed!");
-              return true;
+              return startGame();
             })
             .on('error', function (error) {
               console.error('Transaction Error:', error);
@@ -45,7 +43,7 @@ async function makePayment() {
   }
 }
 
-async function keygen(){
+async function keygen(score){
  if (typeof window.ethereum !== 'undefined') {
     try {
       await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -61,7 +59,7 @@ async function keygen(){
         .then(async function (data) {
             const contractAddress = '0xC391E2Dd921a0C9F18091b753eE06570C4651978';
             const contract = new provider.eth.Contract(data.abi, contractAddress);
-            const inputString = document.getElementById("username").value;
+            const inputString = document.getElementById("username").value+score;
 
             try {
               const hash = await contract.methods.generateKeccak256(inputString).call();

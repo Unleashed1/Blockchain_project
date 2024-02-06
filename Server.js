@@ -36,7 +36,7 @@ app.use(express.json());
 
 // API per ottenere dati dal database
 app.get('/api/dati', (req, res) => {
-  const query = 'SELECT * FROM scores ORDER BY score ASC';
+  const query = 'SELECT * FROM scores ORDER BY score DESC';
   connection.query(query, (err, results, fields) => {
     if (err) {
       console.error('Errore durante l\'esecuzione della query:', err);

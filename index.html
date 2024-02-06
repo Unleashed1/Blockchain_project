@@ -44,75 +44,20 @@
             <button id="mint" type="button" onclick="mintBtnEvent()" disabled cursor>Mint your score!</button>
             <button id="restart" type="button" disabled cursor>Restart Game</button>
             <script>
-              var score;
               
               function startBtnEvent(){
-                makePayment()
-                .then(x => startGame());
+              makePayment();
               }
 
-              function mintBtnEvent(){
-                keygen()
-                .then(chiave => {
-                  alert(chiave);
-                  var username = document.getElementById('username').value;
-
-                  data={
-                  "username": username,
-                  "score": score,
-                  "chiave": chiave
-                  }
-                  console.log(data);
-                   fetch("http://127.0.0.1:3000/api/dati", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Handle the response from the server here if needed
-        console.log('Server response:', data);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-                  //INSERIRE QUA DENTRO LA CALL PER MINTARE NEL DB LA CHIAVE
-                });
+              async function mintBtnEvent(){
+                const response = await fetch('http://localhost:3000/api/dati');
+                const dati =  await response.json();
+                const scoreExists = dati.some(item => item.score === getScore());
+                if(!scoreExists){keygen(getScore())
+                .then(chiave => { mintScore(chiave)}).then(alert("this is your key to certificate your unique score! Save it!", chiave));
+                }
+                else alert("Sorry, someone already minted this score!")
               }
-//               const startBtn = document.getElementById('start');
-//               const mintBtn = document.getElementById('mint');
-//
-//               async function payment(){
-//                 try{
-//                   const payment = await makePayment();
-//                   if(!payment){
-//                     startGame();
-//                   }else{
-//                     alert('You have to pay before play!')
-//                   }
-//                 } catch (error) {
-//                   console.error("Error:", error);
-//                 }
-//               }
-//               /*onclick="makePayment()" onclick="keygen()"*/
-//               startBtn.addEventListener('click',payment);
-//               function key(){
-//                 try{
-//                   keygen()
-//                   .then( chiave => {
-//                       console.log("catch promise", chiave);
-//                       alert(chiave);
-//                       mintBtn.disabled=true;
-//                   });
-//
-//                 }catch (error) {
-//                   console.error("Error:", error);
-//                 }
-//               }
-//
-//               mintBtn.addEventListener('click', key);
 
 
             </script>
@@ -142,18 +87,21 @@
                 let tableBody = document.getElementById('tableBody');
                 tableBody.innerHTML = '';
                 let num = 1;
-            
-                for (let i = 0; i < dati.length; i += 3) {
+
+                // Limit the number of records to display to the first 10
+                const first10Dati = dati.slice(0, 10);
+
+                for (let i = 0; i < first10Dati.length; i += 2) {
                   let row = '<tr>';
-                  for (let j = i; j < i + 3; j++) {
-                    if (j < dati.length) {
-                      const dato = dati[j];
+                  for (let j = i; j < i + 2; j++) {
+                    if (j < first10Dati.length) {
+                      const dato = first10Dati[j];
                       row += '<td>' + num + '</td>';
                       row += '<td>' + dato.username + '</td>';
                       row += '<td>' + dato.score + '</td>';
                       num++;
                     } else {
-                      // Aggiungi colonne vuote se non ci sono dati sufficienti per completare la riga
+                      // Add empty columns if there are not enough data to complete the row
                       row += '<td></td><td></td><td></td>';
                     }
                   }
@@ -161,6 +109,7 @@
                   tableBody.innerHTML += row;
                 }
               }
+
               ottieniDati();
             </script>
             
