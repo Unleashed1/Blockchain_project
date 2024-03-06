@@ -57,15 +57,21 @@ module.exports = {
     // options below to some value.
     //
     // An additional network, but with some advanced options…
-    advanced: {
-         host: "127.0.0.1",
+   /* advanced: {
+         host: "192.168.32.1",
          port: 7545,             // Custom port
-         network_id: 5777,       // Custom network
+         network_id: "5777",       // Custom network
          gas: 6700000,           // Gas sent with each transaction (default: ~6700000)
          gasPrice: 20000000000,  // 20 gwei (in wei) (default: 100 gwei)
-         from: "0x6A3A0eeDe87c645B693F7a4D4d560298f5d0508B",        // Account to send transactions from (default: accounts[0]) da cambiare se cambiamo la block
+         from: "0x6613758Eec5BE0e7c881559ee308b5362d47dD7F",        // Account to send transactions from (default: accounts[0]) da cambiare se cambiamo la block
          websocket: true         // Enable EventEmitter interface for web3 (default: false)
-     }
+     }*/
+
+     development:{
+      host: '192.168.32.1',
+      port: 7545,             // Custom port
+      network_id: "5777", 
+    }
     //
     // Useful for deploying to a public network.
     // Note: It's important to wrap the provider as a function to ensure truffle uses a new provider every time.
