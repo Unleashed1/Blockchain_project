@@ -1,7 +1,7 @@
 const { Resolver } = require("truffle");
 
 
-async function makePayment() {
+async function PlayGame() {
   if (typeof window.ethereum !== 'undefined') {
     try {
       await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -18,7 +18,7 @@ async function makePayment() {
           return response.json();
         })
         .then(function (data) {
-          const contractAddress = '0xdf35970337Ef0A504990A291A60CC32C61f508d1';
+          const contractAddress = '0x88b1933944122Ac6bf17B7edeFa9D48f79242e0A';
           const contract = new provider.eth.Contract(data.abi, contractAddress);
           const promise = new Promise((resolve,reject)=>{
             contract.methods.balanceOf(userAddress).call(function(err,res){
@@ -112,7 +112,7 @@ async function keygen(score){
             return response.json();
       })
         .then(async function (data) {
-            const contractAddress = '0x9B9B7dB97046A15749149B345b88dA51d80c3984';
+            const contractAddress = '0x03c1Fa8ba623455b1962C06a3bB0869A5B90a78D';
             const contract = new provider.eth.Contract(data.abi, contractAddress);
             const inputString = document.getElementById("username").value+score;
 
