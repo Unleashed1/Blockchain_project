@@ -42,17 +42,14 @@ async function PlayGame() {
                   console.log('Transaction hash0:', hash);
                   return startGame();
                 })
-                /*.on('confirmation', function(confirmationNumber, receipt) {
-                  console.log('Transaction confirmation number:', confirmationNumber);
-                  console.log('Transaction receip1t:', receipt);
-                })*/
                 .on('error', function(error) {
                     console.error('Error during transaction:', error);
                 });
                 
               }
               else{
-                contract.methods.mint(2).send({from: userAddress, value: provider.utils.toWei('2', 'ether')})
+                /*
+                contract.methods.mint(1).send({from: userAddress, value: provider.utils.toWei('1', 'ether')})
                 .on('transactionHash', function(hash) {
                   console.log('Transaction hash:', hash);
                 })
@@ -63,7 +60,8 @@ async function PlayGame() {
                 })
                 .on('error', function(error) {
                     console.error('Error during transaction:', error);
-                });
+                });*/
+                alert("You don't have enought token, Buy it!");
               }
             }, 
             (error) => {
@@ -128,5 +126,39 @@ async function keygen(score){
       }catch(error){
         console.error("che cazzo non funziona:",error);
       }
+  }
+}
+
+async function Buy(numToken) {
+  if (typeof window.ethereum !== 'undefined') {
+    try {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const provider = new Web3(window.ethereum);
+
+      const accounts = await provider.eth.getAccounts();
+      const userAddress = accounts[0];
+
+      return fetch("./build/contracts/BerryTk.json")
+        .then(function (response) {
+          return response.json();
+        })
+        .then(async function (data) {
+          const contractAddress = '0x88b1933944122Ac6bf17B7edeFa9D48f79242e0A';
+          const contract = new provider.eth.Contract(data.abi, contractAddress);
+          const inputString = numToken;
+
+          try {
+            contract.methods.mint(inputString).send({ from: userAddress, value: provider.utils.toWei(inputString.toString(), 'ether') })
+              .on('transactionHash', function (hash) {
+                console.log('Transaction hash:', hash);
+              })
+              
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        });
+    } catch (error) {
+      console.error("Error:", error);
+    }
   }
 }
