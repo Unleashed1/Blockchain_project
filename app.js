@@ -184,7 +184,6 @@ async function endGame() {
       restartBtn.disabled = true;
       mintBtn.disabled = false;
       payment=false;
-      mintScore();
       score = 0;
       buyTk.disabled=false;
     } 
