@@ -1,5 +1,8 @@
 {
   "name": "blockchain_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Server.js",
   "type": "module",
   "directories": {
     "test": "test"

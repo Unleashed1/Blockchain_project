@@ -21,6 +21,7 @@ const L2 = document.getElementById("L2");
 const L3 = document.getElementById("L3");
 
 const scoreBoard = document.getElementById('score');
+const chiave = document.getElementById('chiave');
 
 let isJumping = false;
 score = 0;
