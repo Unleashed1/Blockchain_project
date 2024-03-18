@@ -7,6 +7,7 @@ const mintBtn = document.getElementById('mint');
 const restartBtn = document.getElementById('restart');
 const gameInsights = document.getElementById('game-insights');
 const username = document.getElementById('username').value;
+const buyTk = document.getElementById('BuyTok');
 
 
 //let payment=document.getElementById('payment');
@@ -183,8 +184,8 @@ async function endGame() {
       restartBtn.disabled = true;
       mintBtn.disabled = false;
       payment=false;
-      mintScore();
       score = 0;
+      buyTk.disabled=false;
     } 
 
   }

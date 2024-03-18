@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Luffy's Jumping Game</title>
+    <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+    <script src="back.js"></script>
   </head>
-        <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
-  <script src="back.js"></script>
-
+  <body>
     <div class="container">
       <div class="game-container">
         <div id="game-insights">
@@ -40,13 +40,63 @@
             />
           </div>
           <div class="btns">
+            <button id="buyTok" type="button" onclick="buyTokenEvent()">Buy Token</button>
             <button id="start" type="button" onclick="startBtnEvent()" cursor>Start Game</button>
             <button id="mint" type="button" onclick="mintBtnEvent()" disabled cursor>Mint your score!</button>
             <button id="restart" type="button" disabled cursor>Restart Game</button>
+            <div id="modal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>How many tokens would you like to buy?</p>
+                <input type="number" id="tokenInput" placeholder="Enter number of tokens">
+                <button id="confirmButton">Confirm</button>
+              </div>
+            </div>
             <script>
               
+              function buyTokenEvent(){
+                // Get the modal
+                  //document.getElementById("buyTok").disabled = true;
+                  var modal = document.getElementById("modal");
+                  let numToken;
+
+                  // Get the button that opens the modal
+                  var btn = document.getElementById("buyTok");
+
+                  // Get the <span> element that closes the modal
+                  var span = document.getElementsByClassName("close")[0];
+
+                  // When the user clicks the button, open the modal 
+                  btn.onclick = function() {
+                    modal.style.display = "block";
+                  }
+
+                  // When the user clicks on <span> (x), close the modal
+                  span.onclick = function() {
+                    modal.style.display = "none";
+                  }
+
+                  // When the user clicks anywhere outside of the modal, close it
+                  window.onclick = function(event) {
+                    if (event.target == modal) {
+                      modal.style.display = "none";
+                    }
+                  }
+
+                  // Handle confirmation button click
+                  document.getElementById("confirmButton").onclick = function() {
+                    var numberOfTokens = document.getElementById("tokenInput").value;
+                    // Do something with the number of tokens, like sending it to a server
+                    Buy(numberOfTokens);
+                    // Close the modal
+                    modal.style.display = "none";
+                  }
+
+                
+              }
+
               function startBtnEvent(){
-              makePayment();
+                PlayGame();
               }
 
               async function mintBtnEvent(){
