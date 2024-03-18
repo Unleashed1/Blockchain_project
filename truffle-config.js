@@ -68,7 +68,7 @@ module.exports = {
      }*/
 
      development:{
-      host: '127.0.0.1',
+      host: '192.168.32.1',
       port: 7545,             // Custom port
       network_id: "5777", 
     }

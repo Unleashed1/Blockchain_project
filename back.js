@@ -17,7 +17,7 @@ async function PlayGame() {
           return response.json();
         })
         .then(function (data) {
-          const contractAddress = '0xf5925723Bbc54e5A5A11B72CaC9685e5b612cB86';
+          const contractAddress = '0x9C5C4ad5a34C4546D367Ff78e1E89F0ed899230D';
           const contract = new provider.eth.Contract(data.abi, contractAddress);
           const promise = new Promise((resolve,reject)=>{
             contract.methods.balanceOf(userAddress).call(function(err,res){
@@ -109,7 +109,7 @@ async function keygen(score){
             return response.json();
       })
         .then(async function (data) {
-            const contractAddress = '0xe407F02b96ff1159284e67fEf94bb79BeCb5A08E';
+            const contractAddress = '0x07426F5aD4e502C6F2B9aa923f9ED76317680e6b';
             const contract = new provider.eth.Contract(data.abi, contractAddress);
             const inputString = document.getElementById("username").value+score;
 
@@ -144,7 +144,7 @@ async function Buy(numToken) {
           return response.json();
         })
         .then(async function (data) {
-          const contractAddress = '0xf5925723Bbc54e5A5A11B72CaC9685e5b612cB86';
+          const contractAddress = '0x9C5C4ad5a34C4546D367Ff78e1E89F0ed899230D';
           const contract = new provider.eth.Contract(data.abi, contractAddress);
           const inputString = numToken;
 

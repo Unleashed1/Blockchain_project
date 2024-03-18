@@ -7,7 +7,7 @@ const mintBtn = document.getElementById('mint');
 const restartBtn = document.getElementById('restart');
 const gameInsights = document.getElementById('game-insights');
 const username = document.getElementById('username').value;
-const buyTk = document.getElementById('BuyTok');
+const buyTk = document.getElementById('buyTok');
 
 
 //let payment=document.getElementById('payment');
@@ -245,6 +245,7 @@ restartBtn.addEventListener('click',restartGame);
 async function mintScore(chiave){
 //aggiornare il db con il nuovo punteggio se è un nuovo record e salvarlo
 //generare la chiave e darla al giocatore
+
   gameStart=false;
   restartBtn.disabled=false;
   const username = document.getElementById('username').value;

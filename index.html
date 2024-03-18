@@ -105,6 +105,8 @@
                 const scoreExists = dati.some(item => item.score === getScore());
                 if(!scoreExists){keygen(getScore())
                 .then(chiave => { mintScore(chiave)}).then(console.log(JSON.stringify(chiave , null, 2)));
+                
+
                 }
                 else alert("Sorry, someone already minted this score!")
               }
