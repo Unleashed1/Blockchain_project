@@ -57,7 +57,7 @@ module.exports = {
     // options below to some value.
     //
     // An additional network, but with some advanced options…
-   /* advanced: {
+    /*advanced: {
          host: "192.168.32.1",
          port: 7545,             // Custom port
          network_id: "5777",       // Custom network
@@ -68,7 +68,7 @@ module.exports = {
      }*/
 
      development:{
-      host: '192.168.32.1',
+      host: "192.168.32.1",
       port: 7545,             // Custom port
       network_id: "5777", 
     }
