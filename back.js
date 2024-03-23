@@ -1,4 +1,3 @@
-const { Resolver } = require("truffle");
 
 
 async function PlayGame() {
@@ -18,7 +17,7 @@ async function PlayGame() {
           return response.json();
         })
         .then(function (data) {
-          const contractAddress = '0x88b1933944122Ac6bf17B7edeFa9D48f79242e0A';
+          const contractAddress = '0x9C5C4ad5a34C4546D367Ff78e1E89F0ed899230D';
           const contract = new provider.eth.Contract(data.abi, contractAddress);
           const promise = new Promise((resolve,reject)=>{
             contract.methods.balanceOf(userAddress).call(function(err,res){
@@ -110,13 +109,15 @@ async function keygen(score){
             return response.json();
       })
         .then(async function (data) {
-            const contractAddress = '0x03c1Fa8ba623455b1962C06a3bB0869A5B90a78D';
+            const contractAddress = '0x07426F5aD4e502C6F2B9aa923f9ED76317680e6b';
             const contract = new provider.eth.Contract(data.abi, contractAddress);
             const inputString = document.getElementById("username").value+score;
 
             try {
               const hash = await contract.methods.generateKeccak256(inputString).call();
               console.log("dentro keygen", hash);
+              scoreBoard.innerHTML = 'Chiave: ' + chiave;
+
               return hash;
             } catch (error) {
               console.error("Error:", error);
@@ -143,7 +144,7 @@ async function Buy(numToken) {
           return response.json();
         })
         .then(async function (data) {
-          const contractAddress = '0x88b1933944122Ac6bf17B7edeFa9D48f79242e0A';
+          const contractAddress = '0x9C5C4ad5a34C4546D367Ff78e1E89F0ed899230D';
           const contract = new provider.eth.Contract(data.abi, contractAddress);
           const inputString = numToken;
 

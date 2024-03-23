@@ -104,7 +104,9 @@
                 const dati =  await response.json();
                 const scoreExists = dati.some(item => item.score === getScore());
                 if(!scoreExists){keygen(getScore())
-                .then(chiave => { mintScore(chiave)}).then(alert("this is your key to certificate your unique score! Save it!", chiave));
+                .then(chiave => { mintScore(chiave)}).then(console.log(JSON.stringify(chiave , null, 2)));
+                
+
                 }
                 else alert("Sorry, someone already minted this score!")
               }
