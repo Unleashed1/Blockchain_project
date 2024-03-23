@@ -116,7 +116,6 @@ async function keygen(score){
             try {
               const hash = await contract.methods.generateKeccak256(inputString).call();
               console.log("dentro keygen", hash);
-              scoreBoard.innerHTML = 'Chiave: ' + chiave;
 
               return hash;
             } catch (error) {
